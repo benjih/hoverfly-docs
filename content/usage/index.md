@@ -414,7 +414,7 @@ Using hoverctl, you can export all the simulation data from Hoverfly. Exported d
 hoverctl export mysimulation.json
 ```
 
-For more information about hoverctl, check the **Refernce** section.
+For more information about hoverctl, check the **Reference** section.
 
 ### Simulation data JSON format
 
