@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+  
+  
+  
+  
+   <html class="no-js"> 
+
+  <head lang="en-us">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=10" />
+    <title>Introduction - Hoverfly</title>
+    <meta name="generator" content="Hugo 0.17" />
+
+    
+    <meta name="description" content="Open Source API Simulation">
+    
+    <link rel="canonical" href="http://hoverfly.io/introduction/">
+    
+    <meta name="author" content="SpectoLabs">
+    
+
+    <meta property="og:url" content="http://hoverfly.io/introduction/">
+    <meta property="og:title" content="Hoverfly">
+    <meta property="og:image" content="http://hoverfly.io/img/logo.png">
+    <meta name="apple-mobile-web-app-title" content="Hoverfly">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <link rel="shortcut icon" type="image/x-icon" href="http://hoverfly.io/images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="http://hoverfly.io/images/favicon.ico">
+
+    <style>
+      @font-face {
+        font-family: 'Icon';
+        src: url('http://hoverfly.io/fonts/icon.eot?52m981');
+        src: url('http://hoverfly.io/fonts/icon.eot?#iefix52m981')
+               format('embedded-opentype'),
+             url('http://hoverfly.io/fonts/icon.woff?52m981')
+               format('woff'),
+             url('http://hoverfly.io/fonts/icon.ttf?52m981')
+               format('truetype'),
+             url('http://hoverfly.io/fonts/icon.svg?52m981#icon')
+               format('svg');
+        font-weight: normal;
+        font-style: normal;
+      }
+    </style>
+
+    <link rel="stylesheet" href="http://hoverfly.io/stylesheets/application.css">
+    <link rel="stylesheet" href="http://hoverfly.io/stylesheets/temporary.css">
+    <link rel="stylesheet" href="http://hoverfly.io/stylesheets/palettes.css">
+    <link rel="stylesheet" href="http://hoverfly.io/stylesheets/highlight/highlight.css">
+
+    
+    
+    
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700|Consolas">
+    <style>
+      body, input {
+        font-family: 'Lato', Helvetica, Arial, sans-serif;
+      }
+      pre, code {
+        font-family: 'Consolas', 'Courier New', 'Courier', monospace;
+      }
+    </style>
+
+    
+    <script src="http://hoverfly.io/javascripts/modernizr.js"></script>
+
+    
+
+  </head>
+  <body class="palette-primary-black palette-accent-orange">
+
+
+
+	
+	
+
+
+<div class="backdrop">
+	<div class="backdrop-paper"></div>
+</div>
+
+<input class="toggle" type="checkbox" id="toggle-drawer">
+<input class="toggle" type="checkbox" id="toggle-search">
+<label class="toggle-button overlay" for="toggle-drawer"></label>
+
+<header class="header">
+	<nav aria-label="Header">
+  <div class="bar default">
+    <div class="button button-menu" role="button" aria-label="Menu">
+      <label class="toggle-button icon icon-menu" for="toggle-drawer">
+        <span></span>
+      </label>
+    </div>
+    <div class="stretch">
+      <div class="title">
+        Introduction
+      </div>
+    </div>
+
+    
+    <div class="button button-twitter" role="button" aria-label="Twitter">
+       <a href="https://twitter.com/spectolabs" title="@spectolabs on Twitter" target="_blank" class="toggle-button icon icon-twitter"></a>
+    </div>
+    
+
+    
+    <div class="button button-github" role="button" aria-label="GitHub">
+      <a href="https://github.com/SpectoLabs" title="@SpectoLabs on GitHub" target="_blank" class="toggle-button icon icon-github"></a>
+    </div>
+    
+    
+        
+  </div>
+  <div class="bar search">
+    <div class="button button-close" role="button" aria-label="Close">
+      <label class="toggle-button icon icon-back" for="toggle-search"></label>
+    </div>
+    <div class="stretch">
+      <div class="field">
+        <input class="query" type="text" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck>
+      </div>
+    </div>
+    <div class="button button-reset" role="button" aria-label="Search">
+      <button class="toggle-button icon icon-close" id="reset-search"></button>
+    </div>
+  </div>
+</nav>
+</header>
+
+<main class="main">
+	<div class="drawer">
+		<nav aria-label="Navigation">
+  <a href="https://github.com/SpectoLabs/hoverfly" class="project">
+    <div class="banner">
+      
+        <div class="logo">
+          <img src="http://hoverfly.io/img/logo.png">
+        </div>
+      
+      <div class="name">
+        <strong>Hoverfly <span class="version">0.9.0</span></strong>
+        
+          <br>
+          SpectoLabs/hoverfly
+        
+      </div>
+    </div>
+  </a>
+
+  <div class="scrollable">
+    <div class="wrapper">
+      
+        <ul class="repo">
+          <li class="repo-download">
+            <a href="https://github.com/SpectoLabs/hoverfly/releases/latest" target="_blank" title="Download" data-action="download">
+              <i class="icon icon-download"></i> Download
+            </a>
+          </li>
+          <li class="repo-stars">
+            <a href="https://github.com/SpectoLabs/hoverfly/stargazers" target="_blank" title="Stargazers" data-action="star">
+              <i class="icon icon-star"></i> Stars
+              <span class="count">&ndash;</span>
+            </a>
+          </li>
+        </ul>
+        <hr>
+      
+
+      <div class="toc">
+        
+        <ul>
+          
+
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Home" href="http://hoverfly.io/">
+	
+	Home
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a class="current" title="Introduction" href="http://hoverfly.io/introduction/">
+	
+	Introduction
+</a>
+
+
+<ul id="scrollspy">
+</ul>
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Usage" href="http://hoverfly.io/usage/">
+	
+	Usage
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Reference" href="http://hoverfly.io/reference/">
+	
+	Reference
+</a>
+
+
+
+  
+</li>
+
+
+        </ul>
+        
+
+        
+        <hr>
+
+        <ul>
+          
+          <li>
+            <a href="https://twitter.com/spectolabs" target="_blank" title="@spectolabs on Twitter">
+              @spectolabs on Twitter
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://github.com/SpectoLabs" target="_blank" title="@SpectoLabs on GitHub">
+              SpectoLabs on GitHub
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="mailto:contact@specto.io" title="Email of contact@specto.io">
+              Contact via email
+            </a>
+          </li>
+          
+        </ul>
+        
+        <br><br><br>&copy SpectoLabs 2016
+      </div>
+    </div>
+  </div>
+</nav>
+
+	</div>
+
+	<article class="article">
+		<div class="wrapper">
+			<h1>Introduction </h1>
+
+			
+
+<h2 id="motivation">Motivation</h2>
+
+<p>Building and testing interdependent applications is difficult. Maybe you&rsquo;re building a mobile application that needs to talk to a legacy API. Or a microservice that relies on two other services that are still in development.</p>
+
+<p>The problem is the same: how do you develop and test against external dependencies which you cannot control?</p>
+
+<p>You could use mocking libraries as substitutes for external dependencies.  But mocks are intrusive, and do not test all the way to the architectural boundary of your application.  This means the client code for your external dependency is <em>substituted</em> and not <em>tested</em>.</p>
+
+<p>Stub services are better, but they often involve too much configuration or may not be transparent to your application.</p>
+
+<p>Then there is the problem of managing test data. Often, to write proper tests, you need fine-grained control over the data in your mocks or stubs. Managing test data across large projects with multiple teams introduces bottlenecks that impact delivery times.</p>
+
+<p>Integration testing &ldquo;over the wire&rdquo; is problematic too. When stubs or mocks are substituted for real services (in a continuous integration environment for example) new variables are introduced. Network latency and random outages can cause integration tests to fail unexpectedly.</p>
+
+<p>Hoverfly was designed to provide you with the means to create your own &ldquo;dependency sandbox&rdquo;: a simulated development and test environment that you control.</p>
+
+<p>Hoverfly grew out of an effort to build &ldquo;the smallest <a href="https://en.wikipedia.org/wiki/Service_virtualization">service virtualization</a> tool possible&rdquo;.</p>
+
+<hr />
+
+<h2 id="feature-overview">Feature overview</h2>
+
+<ul>
+<li>&ldquo;Capture&rdquo; traffic between a client and a server application</li>
+<li>Use captured traffic to simulate the server application</li>
+<li>Export captured service data as a JSON file</li>
+<li>Import service data JSON files</li>
+<li>Simulate latency by specifying delays which can be applied to individual URLs based on regex patterns, or based on HTTP method</li>
+<li>Flexible request matching using templates</li>
+<li>Supports &ldquo;middleware&rdquo; (which can be written in any language) to manipulate data in requests or responses, or to simulate unexpected behaviour such as malformed responses or random errors</li>
+<li>Supports local or remote middleware execution (for example on <a href="https://docs.aws.amazon.com/lambda/latest/dg/welcome.html">AWS Lambda</a>)</li>
+<li>Uses <a href="https://github.com/boltdb/bolt">BoltDB</a> to persist data in a binary file on disk - so no additional database is required</li>
+<li>REST API</li>
+<li>Run as a transparent proxy or as a webserver</li>
+<li>High performance with minimal overhead</li>
+<li>JUnit rule &ldquo;wrapper&rdquo; is available as a Maven dependency</li>
+<li>Supports HTTPS and can generate certificates if required</li>
+<li>Authentication (combination of Basic Auth and <a href="https://jwt.io/">JWT</a>)</li>
+<li>Command line interface (&ldquo;hoverctl&rdquo;)</li>
+<li>Admin UI to change state and view basic metrics</li>
+</ul>
+
+<hr />
+
+<h2 id="use-cases">Use cases</h2>
+
+<p>Hoverfly is designed to cater for two high-level use cases.</p>
+
+<h3 id="capturing-real-http-s-traffic-between-an-application-and-an-external-service-for-re-use-in-testing-or-development">Capturing real HTTP(S) traffic between an application and an external service for re-use in testing or development.</h3>
+
+<p>If the external service you want to simulate already exists, you can put Hoverfly in between your client application and the external service. Hoverfly can then capture every request from the client application and every matching response from the external service (<em>capture mode</em>).</p>
+
+<p>These request/response pairs are persisted in Hoverfly, and can be exported to a service data JSON file. The service data file can be stored elsewhere (a Git repository, for example), modified as required, then imported back into Hoverfly (or into another Hoverfly instance).</p>
+
+<p>Hoverfly can then act as a &ldquo;surrogate&rdquo; for the external service, returning a matched response for every request it received (<em>simulate mode</em>).</p>
+
+<p>This is useful if you want to create a portable, self-contained version of an external service to develop and test against.</p>
+
+<p>This could allow you to get around the problem of rate-limiting (which can be frustrating when working with a public API).</p>
+
+<p>You can write Hoverfly extensions to manipulate the data in pre-recorded responses, or to simulate network latency.</p>
+
+<p>You could work while offline, or you could speed up your workflow by replacing a slow dependency with a fast Hoverfly &ldquo;surrogate&rdquo;.</p>
+
+<p>More information on these use-cases is available here:</p>
+
+<ul>
+<li><a href="http://www.specto.io/blog/speeding-up-your-slow-dependencies.html">Creating fast versions of slow dependencies</a></li>
+<li><a href="http://www.specto.io/blog/hoverfly-meetup-api.html">Virtualizing the Meetup API</a></li>
+</ul>
+
+<h3 id="creating-simulated-services-for-use-in-a-testing-or-development">Creating simulated services for use in a testing or development.</h3>
+
+<p>In some cases, the external service you want to simulate might not exist yet.</p>
+
+<p>You can create service simulations by writing service data JSON files. This is in line with the principle of <a href="https://en.wikipedia.org/wiki/Design_by_contract">design by contract</a> development.</p>
+
+<p>Service data files can be created by each developer, then stored in a Git repository. Other developers can then import the service data directly from the repository URL, providing them with a Hoverfly &ldquo;surrogate&rdquo; to work with.</p>
+
+<p>Instead of writing a service data file, you could write a &ldquo;middleware&rdquo; script for Hoverfly that generates a response &ldquo;on the fly&rdquo;, based on the request it receives (<em>synthesize mode</em>).</p>
+
+<p>More information on this use-case is available here:</p>
+
+<ul>
+<li><a href="https://github.com/SpectoLabs/hoverfly/tree/master/examples/middleware/synthetic_flight_search">Synthetic service example</a></li>
+<li><a href="https://specto.io/blog/hoverfly-junit-api-simulation.html">Easy API simulation with the Hoverfly JUnit rule</a></li>
+</ul>
+
+<p>Proceed to the <strong>&ldquo;Modes&rdquo; and middleware</strong> section to understand how Hoverfly is used in these contexts.</p>
+
+<hr />
+
+<h2 id="modes-and-middleware">Modes and middleware</h2>
+
+<h3 id="hoverfly-modes">Hoverfly modes</h3>
+
+<p>Hoverfly has four modes. Detailed guides on how to use these modes are available in the <strong>Usage</strong> section.</p>
+
+<h4 id="capture-mode">Capture mode</h4>
+
+<p><img src="hf_capture.png" alt="" /></p>
+
+<p>In this mode, Hoverfly acts as a proxy between the client application and the external service. It transparently intercepts and stores out-going requests from the client and matching incoming responses from the external service.</p>
+
+<p>This is how you capture real traffic for use in development or testing.</p>
+
+<h4 id="simulate-mode">Simulate mode</h4>
+
+<p><img src="hf_simulate.png" alt="" /></p>
+
+<p>In this mode, Hoverfly uses either previously captured traffic, or imported service data files to mimic the external service.</p>
+
+<p>This is useful if you are developing or testing an application that needs to talk to an external service that you don&rsquo;t have reliable access to. You can use the Hoverfly &ldquo;surrogate&rdquo; instead of the real service.</p>
+
+<h4 id="synthesize-mode">Synthesize mode</h4>
+
+<p><img src="hf_synthesize.png" alt="" /></p>
+
+<p>In this mode, Hoverfly doesn&rsquo;t use any stored request/response pairs. Instead, it generates responses to incoming requests on the fly and returns them to the client. This mode is dependent on <em>middleware</em> (see below) to generate the responses.</p>
+
+<p>This is useful if you can&rsquo;t (or don&rsquo;t want to) capture real traffic, or if you don&rsquo;t want to write service data files.</p>
+
+<h4 id="modify-mode">Modify mode</h4>
+
+<p><img src="hf_modify.png" alt="" /></p>
+
+<p>In this mode, Hoverfly passes requests through from the client to the server, and passes the responses back. However, it also executes middleware on the requests and responses.</p>
+
+<p>This is useful for all kinds of things such as manipulating the data in requests and/or responses on the fly.</p>
+
+<h3 id="middleware">Middleware</h3>
+
+<p>Middleware can be written in any language, as long as that language is supported by the Hoverfly host. For example, you could write middleware in Go, Python or JavaScript (if you have Go, Python or NodeJS installed on the Hoverfly host, respectively).</p>
+
+<p>Middleware is applied to the requests and/or the responses depending on the mode:</p>
+
+<ul>
+<li>Capture Mode: middleware affects only outgoing requests</li>
+<li>Simulate Mode: middleware affects only responses (cache contents remain untouched)</li>
+<li>Synthesize Mode: middleware creates responses</li>
+<li>Modify Mode: middleware affects requests and responses</li>
+</ul>
+
+<p>Middleware can be used to do many useful things, such as simulating network latency or failure, rate limits or controlling data in requests and responses.</p>
+
+<p>A detailed guide on how to use middleware is available in the <strong>Usage</strong> section.</p>
+
+
+			<aside class="copyright" role="note">
+				
+			</aside>
+
+			<footer class="footer">
+				
+
+<nav class="pagination" aria-label="Footer">
+  <div class="previous">
+  
+      <a href="http://hoverfly.io/" title="Welcome">
+        <span class="direction">
+          Previous
+        </span>
+        <div class="page">
+          <div class="button button-previous" role="button" aria-label="Previous">
+            <i class="icon icon-back"></i>
+          </div>
+          <div class="stretch">
+            <div class="title">
+              Welcome
+            </div>
+          </div>
+        </div>
+      </a>
+  
+  </div>
+
+  <div class="next">
+  
+      <a href="http://hoverfly.io/usage/" title="Usage">
+        <span class="direction">
+          Next
+        </span>
+        <div class="page">
+          <div class="stretch">
+            <div class="title">
+              Usage
+            </div>
+          </div>
+          <div class="button button-next" role="button" aria-label="Next">
+            <i class="icon icon-forward"></i>
+          </div>
+        </div>
+      </a>
+  
+  </div>
+</nav>
+
+
+
+
+
+			</footer>
+		</div>
+	</article>
+
+	<div class="results" role="status" aria-live="polite">
+		<div class="scrollable">
+			<div class="wrapper">
+				<div class="meta"></div>
+				<div class="list"></div>
+			</div>
+		</div>
+	</div>
+</main>
+
+    <script>
+    
+      var base_url = 'http:\/\/hoverfly.io\/';
+      var repo_id  = 'SpectoLabs\/hoverfly';
+    
+    </script>
+
+    <script src="http://hoverfly.io/javascripts/application.js"></script>
+    
+
+    <script>
+      /* Add headers to scrollspy */
+      var headers   = document.getElementsByTagName("h2");
+      var scrollspy = document.getElementById('scrollspy');
+
+      if(scrollspy) {
+        if(headers.length > 0) {
+          for(var i = 0; i < headers.length; i++) {
+            var li = document.createElement("li");
+            li.setAttribute("class", "anchor");
+
+            var a  = document.createElement("a");
+            a.setAttribute("href", "#" + headers[i].id);
+            a.setAttribute("title", headers[i].innerHTML);
+            a.innerHTML = headers[i].innerHTML;
+            
+            li.appendChild(a)
+            scrollspy.appendChild(li);
+          }
+        } else {
+          scrollspy.parentElement.removeChild(scrollspy)
+        }
+        
+
+        /* Add permanent link next to the headers */
+        var headers = document.querySelectorAll("h1, h2, h3, h4, h5, h6");
+
+        for(var i = 0; i < headers.length; i++) {
+            var a = document.createElement("a");
+            a.setAttribute("class", "headerlink");
+            a.setAttribute("href", "#" + headers[i].id);
+            a.setAttribute("title", "Permanent link")
+            a.innerHTML = "#";
+            headers[i].appendChild(a);
+        }
+      }
+    </script>
+
+    
+
+    <script src="//gohugo.io/js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>

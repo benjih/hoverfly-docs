@@ -1,0 +1,2053 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hoverfly</title>
+    <link>http://hoverfly.io/index.xml</link>
+    <description>Recent content on Hoverfly</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 14 Nov 2016 21:07:13 +0100</lastBuildDate>
+    <atom:link href="http://hoverfly.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Welcome</title>
+      <link>http://hoverfly.io/</link>
+      <pubDate>Mon, 14 Nov 2016 21:07:13 +0100</pubDate>
+      
+      <guid>http://hoverfly.io/</guid>
+      <description>
+
+&lt;p&gt;&lt;img src=&#34;logo-large.png&#34; alt=&#34;Hoverfly logo&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;what-is-hoverfly&#34;&gt;What is Hoverfly?&lt;/h2&gt;
+
+&lt;p&gt;Hoverfly is a lightweight, open source &lt;a href=&#34;https://en.wikipedia.org/wiki/Service_virtualization&#34;&gt;service virtualization&lt;/a&gt; tool. Using Hoverfly, you can virtualize your application dependencies to create a self-contained development or test environment.&lt;/p&gt;
+
+&lt;p&gt;Hoverfly is a proxy written in Go. It can capture HTTP(s) traffic between an application under test and external services, and then replace the external services. It can also generate synthetic responses on the fly.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;get-hoverfly&#34;&gt;Get Hoverfly&lt;/h2&gt;
+
+&lt;p&gt;Hoverfly is a single binary file. It comes with an optional command line interface tool called hoverctl.&lt;/p&gt;
+
+&lt;p&gt;Download one of the zip files below, extract the Hoverfly and hoverctl binaries, and move them to a directory on your &lt;a href=&#34;https://www.java.com/en/download/help/path.xml&#34;&gt;PATH&lt;/a&gt;.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/SpectoLabs/hoverfly/releases/download/v0.9.0/hoverfly_bundle_OSX_amd64.zip&#34;&gt;macOS 64bit&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/SpectoLabs/hoverfly/releases/download/v0.9.0/hoverfly_bundle_linux_386.zip&#34;&gt;Linux 32bit&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/SpectoLabs/hoverfly/releases/download/v0.9.0/hoverfly_bundle_linux_amd64.zip&#34;&gt;Linux 64bit&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/SpectoLabs/hoverfly/releases/download/v0.9.0/hoverfly_bundle_windows_386.zip&#34;&gt;Windows 32bit&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/SpectoLabs/hoverfly/releases/download/v0.9.0/hoverfly_bundle_windows_amd64.zip&#34;&gt;Windows 64bit&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Use &lt;a href=&#34;http://brew.sh/&#34;&gt;Homebrew&lt;/a&gt; to install Hoverfly and hoverctl:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;brew install SpectoLabs/tap/hoverfly
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;run-hoverfly&#34;&gt;Run Hoverfly&lt;/h2&gt;
+
+&lt;p&gt;To capture traffic between your application and an external service, you will need to configure your OS, browser or application to use Hoverfly as a proxy.&lt;/p&gt;
+
+&lt;h3 id=&#34;macos-and-linux&#34;&gt;MacOS and Linux&lt;/h3&gt;
+
+&lt;p&gt;Run Hoverfly using hoverctl:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hoverctl start
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;By default, the Hoverfly proxy runs on localhost:8500. Switch Hoverfly to &amp;ldquo;capture&amp;rdquo; mode and make a request with cURL, using Hoverfly as a proxy:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hoverctl mode capture
+curl --proxy http://localhost:8500 http://hoverfly.io/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Hoverfly has captured the request and the response. View the Hoverfly logs:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hoverctl logs
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Switch Hoverfly to &amp;ldquo;simulate&amp;rdquo; mode&amp;rdquo; and make the same request:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hoverctl mode simulate
+curl --proxy http://localhost:8500 http://hoverfly.io/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Hoverfly has returned the captured response.&lt;/p&gt;
+
+&lt;h3 id=&#34;windows&#34;&gt;Windows&lt;/h3&gt;
+
+&lt;p&gt;Open a command prompt and run Hoverfly using hoverctl:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hoverctl start
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Configure your application, browser or OS to use the Hoverfly proxy (&lt;a href=&#34;http://localhost:8500&#34;&gt;http://localhost:8500&lt;/a&gt;). Switch Hoverfly to &amp;ldquo;capture&amp;rdquo; mode:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hoverctl mode capture
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Make some requests from your application, browser or OS, then view the Hoverfly logs:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hoverctl logs
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Switch Hoverfly to &amp;ldquo;simulate&amp;rdquo; mode:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hoverctl mode simulate
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Make the same requests from your browser, OS or application. Hoverfly is returning the captured responses.&lt;/p&gt;
+
+&lt;p&gt;More information on proxy settings:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.raido.be/?p=426&#34;&gt;Windows proxy settings explained&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://support.mozilla.org/en-US/kb/advanced-panel-settings-in-firefox#w_connection&#34;&gt;Firefox proxy setting&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.oracle.com/javase/6/docs/technotes/guides/net/proxies.html&#34;&gt;Java Networking and Proxies&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Introduction</title>
+      <link>http://hoverfly.io/introduction/</link>
+      <pubDate>Fri, 11 Nov 2016 16:52:28 +0000</pubDate>
+      
+      <guid>http://hoverfly.io/introduction/</guid>
+      <description>
+
+&lt;h2 id=&#34;motivation&#34;&gt;Motivation&lt;/h2&gt;
+
+&lt;p&gt;Building and testing interdependent applications is difficult. Maybe you&amp;rsquo;re building a mobile application that needs to talk to a legacy API. Or a microservice that relies on two other services that are still in development.&lt;/p&gt;
+
+&lt;p&gt;The problem is the same: how do you develop and test against external dependencies which you cannot control?&lt;/p&gt;
+
+&lt;p&gt;You could use mocking libraries as substitutes for external dependencies.  But mocks are intrusive, and do not test all the way to the architectural boundary of your application.  This means the client code for your external dependency is &lt;em&gt;substituted&lt;/em&gt; and not &lt;em&gt;tested&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Stub services are better, but they often involve too much configuration or may not be transparent to your application.&lt;/p&gt;
+
+&lt;p&gt;Then there is the problem of managing test data. Often, to write proper tests, you need fine-grained control over the data in your mocks or stubs. Managing test data across large projects with multiple teams introduces bottlenecks that impact delivery times.&lt;/p&gt;
+
+&lt;p&gt;Integration testing &amp;ldquo;over the wire&amp;rdquo; is problematic too. When stubs or mocks are substituted for real services (in a continuous integration environment for example) new variables are introduced. Network latency and random outages can cause integration tests to fail unexpectedly.&lt;/p&gt;
+
+&lt;p&gt;Hoverfly was designed to provide you with the means to create your own &amp;ldquo;dependency sandbox&amp;rdquo;: a simulated development and test environment that you control.&lt;/p&gt;
+
+&lt;p&gt;Hoverfly grew out of an effort to build &amp;ldquo;the smallest &lt;a href=&#34;https://en.wikipedia.org/wiki/Service_virtualization&#34;&gt;service virtualization&lt;/a&gt; tool possible&amp;rdquo;.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;feature-overview&#34;&gt;Feature overview&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&amp;ldquo;Capture&amp;rdquo; traffic between a client and a server application&lt;/li&gt;
+&lt;li&gt;Use captured traffic to simulate the server application&lt;/li&gt;
+&lt;li&gt;Export captured service data as a JSON file&lt;/li&gt;
+&lt;li&gt;Import service data JSON files&lt;/li&gt;
+&lt;li&gt;Simulate latency by specifying delays which can be applied to individual URLs based on regex patterns, or based on HTTP method&lt;/li&gt;
+&lt;li&gt;Flexible request matching using templates&lt;/li&gt;
+&lt;li&gt;Supports &amp;ldquo;middleware&amp;rdquo; (which can be written in any language) to manipulate data in requests or responses, or to simulate unexpected behaviour such as malformed responses or random errors&lt;/li&gt;
+&lt;li&gt;Supports local or remote middleware execution (for example on &lt;a href=&#34;https://docs.aws.amazon.com/lambda/latest/dg/welcome.html&#34;&gt;AWS Lambda&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Uses &lt;a href=&#34;https://github.com/boltdb/bolt&#34;&gt;BoltDB&lt;/a&gt; to persist data in a binary file on disk - so no additional database is required&lt;/li&gt;
+&lt;li&gt;REST API&lt;/li&gt;
+&lt;li&gt;Run as a transparent proxy or as a webserver&lt;/li&gt;
+&lt;li&gt;High performance with minimal overhead&lt;/li&gt;
+&lt;li&gt;JUnit rule &amp;ldquo;wrapper&amp;rdquo; is available as a Maven dependency&lt;/li&gt;
+&lt;li&gt;Supports HTTPS and can generate certificates if required&lt;/li&gt;
+&lt;li&gt;Authentication (combination of Basic Auth and &lt;a href=&#34;https://jwt.io/&#34;&gt;JWT&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Command line interface (&amp;ldquo;hoverctl&amp;rdquo;)&lt;/li&gt;
+&lt;li&gt;Admin UI to change state and view basic metrics&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;use-cases&#34;&gt;Use cases&lt;/h2&gt;
+
+&lt;p&gt;Hoverfly is designed to cater for two high-level use cases.&lt;/p&gt;
+
+&lt;h3 id=&#34;capturing-real-http-s-traffic-between-an-application-and-an-external-service-for-re-use-in-testing-or-development&#34;&gt;Capturing real HTTP(S) traffic between an application and an external service for re-use in testing or development.&lt;/h3&gt;
+
+&lt;p&gt;If the external service you want to simulate already exists, you can put Hoverfly in between your client application and the external service. Hoverfly can then capture every request from the client application and every matching response from the external service (&lt;em&gt;capture mode&lt;/em&gt;).&lt;/p&gt;
+
+&lt;p&gt;These request/response pairs are persisted in Hoverfly, and can be exported to a service data JSON file. The service data file can be stored elsewhere (a Git repository, for example), modified as required, then imported back into Hoverfly (or into another Hoverfly instance).&lt;/p&gt;
+
+&lt;p&gt;Hoverfly can then act as a &amp;ldquo;surrogate&amp;rdquo; for the external service, returning a matched response for every request it received (&lt;em&gt;simulate mode&lt;/em&gt;).&lt;/p&gt;
+
+&lt;p&gt;This is useful if you want to create a portable, self-contained version of an external service to develop and test against.&lt;/p&gt;
+
+&lt;p&gt;This could allow you to get around the problem of rate-limiting (which can be frustrating when working with a public API).&lt;/p&gt;
+
+&lt;p&gt;You can write Hoverfly extensions to manipulate the data in pre-recorded responses, or to simulate network latency.&lt;/p&gt;
+
+&lt;p&gt;You could work while offline, or you could speed up your workflow by replacing a slow dependency with a fast Hoverfly &amp;ldquo;surrogate&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;More information on these use-cases is available here:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.specto.io/blog/speeding-up-your-slow-dependencies.html&#34;&gt;Creating fast versions of slow dependencies&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.specto.io/blog/hoverfly-meetup-api.html&#34;&gt;Virtualizing the Meetup API&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;creating-simulated-services-for-use-in-a-testing-or-development&#34;&gt;Creating simulated services for use in a testing or development.&lt;/h3&gt;
+
+&lt;p&gt;In some cases, the external service you want to simulate might not exist yet.&lt;/p&gt;
+
+&lt;p&gt;You can create service simulations by writing service data JSON files. This is in line with the principle of &lt;a href=&#34;https://en.wikipedia.org/wiki/Design_by_contract&#34;&gt;design by contract&lt;/a&gt; development.&lt;/p&gt;
+
+&lt;p&gt;Service data files can be created by each developer, then stored in a Git repository. Other developers can then import the service data directly from the repository URL, providing them with a Hoverfly &amp;ldquo;surrogate&amp;rdquo; to work with.&lt;/p&gt;
+
+&lt;p&gt;Instead of writing a service data file, you could write a &amp;ldquo;middleware&amp;rdquo; script for Hoverfly that generates a response &amp;ldquo;on the fly&amp;rdquo;, based on the request it receives (&lt;em&gt;synthesize mode&lt;/em&gt;).&lt;/p&gt;
+
+&lt;p&gt;More information on this use-case is available here:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/SpectoLabs/hoverfly/tree/master/examples/middleware/synthetic_flight_search&#34;&gt;Synthetic service example&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://specto.io/blog/hoverfly-junit-api-simulation.html&#34;&gt;Easy API simulation with the Hoverfly JUnit rule&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Proceed to the &lt;strong&gt;&amp;ldquo;Modes&amp;rdquo; and middleware&lt;/strong&gt; section to understand how Hoverfly is used in these contexts.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;modes-and-middleware&#34;&gt;Modes and middleware&lt;/h2&gt;
+
+&lt;h3 id=&#34;hoverfly-modes&#34;&gt;Hoverfly modes&lt;/h3&gt;
+
+&lt;p&gt;Hoverfly has four modes. Detailed guides on how to use these modes are available in the &lt;strong&gt;Usage&lt;/strong&gt; section.&lt;/p&gt;
+
+&lt;h4 id=&#34;capture-mode&#34;&gt;Capture mode&lt;/h4&gt;
+
+&lt;p&gt;&lt;img src=&#34;hf_capture.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In this mode, Hoverfly acts as a proxy between the client application and the external service. It transparently intercepts and stores out-going requests from the client and matching incoming responses from the external service.&lt;/p&gt;
+
+&lt;p&gt;This is how you capture real traffic for use in development or testing.&lt;/p&gt;
+
+&lt;h4 id=&#34;simulate-mode&#34;&gt;Simulate mode&lt;/h4&gt;
+
+&lt;p&gt;&lt;img src=&#34;hf_simulate.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In this mode, Hoverfly uses either previously captured traffic, or imported service data files to mimic the external service.&lt;/p&gt;
+
+&lt;p&gt;This is useful if you are developing or testing an application that needs to talk to an external service that you don&amp;rsquo;t have reliable access to. You can use the Hoverfly &amp;ldquo;surrogate&amp;rdquo; instead of the real service.&lt;/p&gt;
+
+&lt;h4 id=&#34;synthesize-mode&#34;&gt;Synthesize mode&lt;/h4&gt;
+
+&lt;p&gt;&lt;img src=&#34;hf_synthesize.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In this mode, Hoverfly doesn&amp;rsquo;t use any stored request/response pairs. Instead, it generates responses to incoming requests on the fly and returns them to the client. This mode is dependent on &lt;em&gt;middleware&lt;/em&gt; (see below) to generate the responses.&lt;/p&gt;
+
+&lt;p&gt;This is useful if you can&amp;rsquo;t (or don&amp;rsquo;t want to) capture real traffic, or if you don&amp;rsquo;t want to write service data files.&lt;/p&gt;
+
+&lt;h4 id=&#34;modify-mode&#34;&gt;Modify mode&lt;/h4&gt;
+
+&lt;p&gt;&lt;img src=&#34;hf_modify.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In this mode, Hoverfly passes requests through from the client to the server, and passes the responses back. However, it also executes middleware on the requests and responses.&lt;/p&gt;
+
+&lt;p&gt;This is useful for all kinds of things such as manipulating the data in requests and/or responses on the fly.&lt;/p&gt;
+
+&lt;h3 id=&#34;middleware&#34;&gt;Middleware&lt;/h3&gt;
+
+&lt;p&gt;Middleware can be written in any language, as long as that language is supported by the Hoverfly host. For example, you could write middleware in Go, Python or JavaScript (if you have Go, Python or NodeJS installed on the Hoverfly host, respectively).&lt;/p&gt;
+
+&lt;p&gt;Middleware is applied to the requests and/or the responses depending on the mode:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Capture Mode: middleware affects only outgoing requests&lt;/li&gt;
+&lt;li&gt;Simulate Mode: middleware affects only responses (cache contents remain untouched)&lt;/li&gt;
+&lt;li&gt;Synthesize Mode: middleware creates responses&lt;/li&gt;
+&lt;li&gt;Modify Mode: middleware affects requests and responses&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Middleware can be used to do many useful things, such as simulating network latency or failure, rate limits or controlling data in requests and responses.&lt;/p&gt;
+
+&lt;p&gt;A detailed guide on how to use middleware is available in the &lt;strong&gt;Usage&lt;/strong&gt; section.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Usage</title>
+      <link>http://hoverfly.io/usage/</link>
+      <pubDate>Fri, 11 Nov 2016 16:53:40 +0000</pubDate>
+      
+      <guid>http://hoverfly.io/usage/</guid>
+      <description>
+
+&lt;h2 id=&#34;installation-and-setup&#34;&gt;Installation and setup&lt;/h2&gt;
+
+&lt;p&gt;Hoverfly is a single binary file. It comes with an optional command line interface tool called hoverctl.&lt;/p&gt;
+
+&lt;p&gt;Download one of the zip files below, extract the Hoverfly and hoverctl binaries, and move them to a directory on your &lt;a href=&#34;https://www.java.com/en/download/help/path.xml&#34;&gt;PATH&lt;/a&gt;.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/SpectoLabs/hoverfly/releases/download/v0.9.0/hoverfly_bundle_OSX_amd64.zip&#34;&gt;macOS 64bit&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/SpectoLabs/hoverfly/releases/download/v0.9.0/hoverfly_bundle_linux_386.zip&#34;&gt;Linux 32bit&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/SpectoLabs/hoverfly/releases/download/v0.9.0/hoverfly_bundle_linux_amd64.zip&#34;&gt;Linux 64bit&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/SpectoLabs/hoverfly/releases/download/v0.9.0/hoverfly_bundle_windows_386.zip&#34;&gt;Windows 32bit&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/SpectoLabs/hoverfly/releases/download/v0.9.0/hoverfly_bundle_windows_amd64.zip&#34;&gt;Windows 64bit&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Use &lt;a href=&#34;http://brew.sh/&#34;&gt;Homebrew&lt;/a&gt; to install Hoverfly and hoverctl:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;brew install SpectoLabs/tap/hoverfly
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;docker-image&#34;&gt;Docker image&lt;/h3&gt;
+
+&lt;p&gt;The Hoverfly docker image contains only the Hoverfly binary.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;docker run -d -p 8888:8888 -p 8500:8500 spectolabs/hoverfly
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The port mapping is for the Hoverfly AdminUI/API and proxy respectively. The Docker image supports Hoverfly flags (see &lt;strong&gt;Flags and environment variables&lt;/strong&gt; in the &lt;strong&gt;Usage&lt;/strong&gt; section).&lt;/p&gt;
+
+&lt;h3 id=&#34;junit-rule&#34;&gt;JUnit rule&lt;/h3&gt;
+
+&lt;p&gt;The Hoverfly JUnit rule is available as a Maven dependency. To get started, add the following to your pom.xml:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;groupId&amp;gt;io.specto&amp;lt;/groupId&amp;gt;
+&amp;lt;artifactId&amp;gt;hoverfly-junit&amp;lt;/artifactId&amp;gt;
+&amp;lt;version&amp;gt;0.1.4&amp;lt;/version&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This will download the JUnit rule and the Hoverfly binary. More information on how to use the Hoverfly JUnit rule is available here:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://specto.io/blog/hoverfly-junit-api-simulation.html&#34;&gt;Easy API Simulation with the Hoverfly JUnit Rule&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;setting-the-hoverfly-host-environment-variable&#34;&gt;Setting the HOVERFLY_HOST environment variable&lt;/h3&gt;
+
+&lt;p&gt;Throughout the documentation, &lt;code&gt;${HOVERFLY_HOST}&lt;/code&gt; is used in API examples and Admin UI guides. If you are running a binary on your local machine, the Hoverfly host will be &lt;code&gt;localhost&lt;/code&gt;. However, if you are running Hoverfly on a remote machine, or using Docker Machine for example, it will be different.&lt;/p&gt;
+
+&lt;p&gt;To make things easier when following the documentation, it is recommended that you set the HOVERFLY_HOST environment variable. For example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;export HOVERFLY_HOST=localhost
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;hoverfly-as-an-http-s-proxy&#34;&gt;Hoverfly as an HTTP(S) proxy&lt;/h3&gt;
+
+&lt;p&gt;Hoverfly is primarily a proxy - although it can run (with limitations) as a webserver. To use Hoverfly in your development or test environment to capture traffic, you need to ensure that your application is using it as a proxy. This can be done at the OS level, or at the application level, depending on the environment.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.raido.be/?p=426&#34;&gt;Windows proxy settings explained&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://support.mozilla.org/en-US/kb/advanced-panel-settings-in-firefox#w_connection&#34;&gt;Firefox proxy setting&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.oracle.com/javase/6/docs/technotes/guides/net/proxies.html&#34;&gt;Java Networking and Proxies&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;admin-ui&#34;&gt;Admin UI&lt;/h3&gt;
+
+&lt;p&gt;The Hoverfly Admin UI is available on port 8888 by default:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;http://${HOVERFLY_HOST}:8888
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The port is configurable (see the &lt;strong&gt;Flags and environment variables&lt;/strong&gt; section).&lt;/p&gt;
+
+&lt;p&gt;When authentication is disabled (which is the default), you can use &lt;strong&gt;any username and password combination&lt;/strong&gt; to access the Admin UI.&lt;/p&gt;
+
+&lt;p&gt;The Admin UI can be used to change the Hoverfly mode, and to view basic analytic information. It uses the Hoverfly API.&lt;/p&gt;
+
+&lt;h3 id=&#34;starting-hoverfly-as-a-webserver&#34;&gt;Starting Hoverfly as a webserver&lt;/h3&gt;
+
+&lt;p&gt;While Hoverfly is primarily a proxy, there are some situations in which you may need to run it as a webserver - for example if setting the host OS or application to use a proxy is not possible or desirable.&lt;/p&gt;
+
+&lt;p&gt;Currently, when running as a webserver, Hoverfly can only be set to &lt;em&gt;simulate&lt;/em&gt; mode. This is useful if you have a simulation that has been created by capturing traffic using a Hoverfly instance running as a proxy, and you want to import and run it in an environment which cannot be configured to use a proxy.&lt;/p&gt;
+
+&lt;p&gt;If you are using hoverctl to manage your instance of Hoverfly, you can start Hoverfly as a webserver using hoverctl.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hoverctl start webserver
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you are running the Hoverfly binary, you can specify the webserver flag which will start Hoverfly as a webserver.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;./hoverfly -webserver
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; Currently HTTPS is not supported when running Hoverfly as a webserver. HTTPS support when running as a webserver is on the roadmap.&lt;/p&gt;
+
+&lt;h4 id=&#34;simulations-and-request-matching&#34;&gt;Simulations and request matching&lt;/h4&gt;
+
+&lt;p&gt;When running as a webserver, although Hoverfly functionality is limited to simulate mode, Hoverfly still uses the standard simulations.&lt;/p&gt;
+
+&lt;p&gt;When Hoverfly is running as a webserver, the server is available on the same port as the proxy. When you make requests to the webserver, responses will be matched in the same way as with the proxy, except the host will be disregarded. This means that if you have a simulation with multiple hosts, they will all be served from the same host.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;capturing-traffic&#34;&gt;Capturing traffic&lt;/h2&gt;
+
+&lt;h3 id=&#34;set-up&#34;&gt;Set up&lt;/h3&gt;
+
+&lt;p&gt;To capture traffic, you will need:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;A client application (this could be an application you are developing or testing, or cURL if you just want to experiment)&lt;/li&gt;
+&lt;li&gt;An external service or API that your client application communicates with over HTTP or HTTPS&lt;/li&gt;
+&lt;li&gt;Hoverfly - either as a binary or the Docker image&lt;/li&gt;
+&lt;li&gt;Your application or OS configured to use Hoverfly as an HTTP or HTTPS proxy&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Please follow the steps in the &lt;strong&gt;Installation and setup&lt;/strong&gt; section if you haven&amp;rsquo;t already.&lt;/p&gt;
+
+&lt;p&gt;If you want to capture traffic to and from a service over HTTPS, you will need to set up certificates. Please refer to the &lt;strong&gt;Certificate management&lt;/strong&gt; section.&lt;/p&gt;
+
+&lt;h3 id=&#34;capture-some-traffic&#34;&gt;Capture some traffic&lt;/h3&gt;
+
+&lt;p&gt;First put Hoverfly into &lt;em&gt;capture mode&lt;/em&gt;. There are four ways to do this.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;A:&lt;/strong&gt; Use hoverctl to set the mode of the running Hoverfly:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hoverctl mode capture
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;B:&lt;/strong&gt; Start Hoverfly with the &lt;code&gt;-capture&lt;/code&gt; flag:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;./hoverfly -capture
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;C:&lt;/strong&gt; Ensure Hoverfly is running (in any mode), then select &amp;ldquo;capture&amp;rdquo; in the Admin UI, which is available at &lt;code&gt;http://${HOVERFLY_HOST}:8888&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;D:&lt;/strong&gt; Ensure Hoverfly is running (in any mode), then make an API call:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;curl -H &amp;quot;Content-Type application/json&amp;quot; -X PUT -d &#39;{&amp;quot;mode&amp;quot;:&amp;quot;capture&amp;quot;}&#39; http://${HOVERFLY_HOST}:8888/api/v2/hoverfly/mode
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The simplest way to capture some traffic is to use cURL:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;curl http://&amp;lt;MY_EXTERNAL_SERVICE&amp;gt; --proxy http://${HOVERFLY_HOST}:8500/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Or if you are developing or testing an application that uses an external service, just run your tests.&lt;/p&gt;
+
+&lt;p&gt;To verify that Hoverfly is capturing traffic, you can look at the Hoverfly logging output, or the Admin UI.&lt;/p&gt;
+
+&lt;p&gt;You can also make an API call to view captured traffic:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;curl http://${HOVERFLY_HOST}:8888/api/v2/simulation
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;what-is-happening&#34;&gt;What is happening?&lt;/h3&gt;
+
+&lt;p&gt;Hoverfly is transparently passing requests from the client application through to the destination service, then passing the responses back. It is storing the request/response pairs in memory, and persisting them on disk in a file named &lt;code&gt;requests.db&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;deleting-all-captured-traffic&#34;&gt;Deleting all captured traffic&lt;/h3&gt;
+
+&lt;p&gt;This can be done in three ways.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;A:&lt;/strong&gt; Use hoverctl to wipe Hoverfly&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hoverctl wipe
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;B:&lt;/strong&gt; Visit the Admin UI at &lt;code&gt;http://${HOVERFLY_HOST}:8888&lt;/code&gt; and click &amp;ldquo;Wipe records&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;C:&lt;/strong&gt; Make an API call:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;curl -X DELETE http://${HOVERFLY_HOST}:8888/api/v2/simulation
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;next-steps&#34;&gt;Next steps&lt;/h3&gt;
+
+&lt;p&gt;Now you can use Hoverfly to mimic the external service. Proceed to the &lt;strong&gt;Simulating services&lt;/strong&gt; section.&lt;/p&gt;
+
+&lt;p&gt;If you want to export the traffic you have captured, proceed to the &lt;strong&gt;Exporting and importing&lt;/strong&gt; section.&lt;/p&gt;
+
+&lt;h3 id=&#34;further-reading&#34;&gt;Further reading&lt;/h3&gt;
+
+&lt;p&gt;A detailed step-by-step guide to capturing traffic and creating a simulated service is available here:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://specto.io/blog/speeding-up-your-slow-dependencies.html&#34;&gt;Speeding up your slow dependencies&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;simulating-services&#34;&gt;Simulating services&lt;/h2&gt;
+
+&lt;h3 id=&#34;set-up-1&#34;&gt;Set up&lt;/h3&gt;
+
+&lt;p&gt;To simulate a service, you will need to have either captured some traffic (see the &lt;strong&gt;Capturing traffic&lt;/strong&gt; section) or imported a service data file (see the &lt;strong&gt;Exporting and importing&lt;/strong&gt; section).&lt;/p&gt;
+
+&lt;h3 id=&#34;simulate-a-service&#34;&gt;Simulate a service&lt;/h3&gt;
+
+&lt;h4 id=&#34;with-hoverfly-running-as-a-proxy&#34;&gt;With Hoverfly running as a proxy&lt;/h4&gt;
+
+&lt;p&gt;You will need to have your application or OS configured to use Hoverfly as a proxy (see the &lt;strong&gt;Installation and setup&lt;/strong&gt; section).&lt;/p&gt;
+
+&lt;p&gt;Put Hoverfly into &lt;em&gt;simulate mode&lt;/em&gt;. There are four ways of doing this:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;A:&lt;/strong&gt; Use hoverctl to start Hoverfly and set the mode to simulate:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hoverctl start
+hoverctl mode simulate
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;B:&lt;/strong&gt; Start Hoverfly without specifying the mode (Hoverfly starts in &lt;em&gt;simulate mode&lt;/em&gt; by default)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;./hoverfly
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;C:&lt;/strong&gt; Ensure Hoverfly is running (in any mode), then select &amp;ldquo;simulate&amp;rdquo; in the Admin UI, which is available at &lt;code&gt;http://${HOVERFLY_HOST}:8888&lt;/code&gt; by default.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;D:&lt;/strong&gt; Ensure Hoverfly is running (in any mode), then make an API call:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;curl -H &amp;quot;Content-Type application/json&amp;quot; -X POST -d &#39;{&amp;quot;mode&amp;quot;:&amp;quot;simulate&amp;quot;}&#39; http://${HOVERFLY_HOST}:8888/api/v2/hoverfly/mode
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Provided you have previously captured traffic either using cURL or by running tests, you can now repeat the steps you took to capture traffic.&lt;/p&gt;
+
+&lt;p&gt;Instead of using the external service you captured, your application (or cURL) will now be using the Hoverfly simulation.&lt;/p&gt;
+
+&lt;p&gt;If you are running a test suite, you will probably notice that it runs much faster.&lt;/p&gt;
+
+&lt;h4 id=&#34;with-hoverfly-running-as-a-webserver&#34;&gt;With Hoverfly running as a webserver&lt;/h4&gt;
+
+&lt;p&gt;Put Hoverfly into &lt;em&gt;simulate mode&lt;/em&gt; while it is running as a webserver. There are two ways to do this:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;A:&lt;/strong&gt; Use hoverctl to start Hoverfly as a webserver, and set the mode to simulate:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hoverctl start webserver
+hoverctl mode simulate
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;B:&lt;/strong&gt; Start Hoverfly with the &lt;code&gt;-webserver&lt;/code&gt; flag and do not specify a mode (Hoverfly starts in &lt;em&gt;simulate mode&lt;/em&gt; by default)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;./hoverfly -webserver
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; When running as a webserver, Hoverfly currently only supports &lt;em&gt;simulate&lt;/em&gt; mode.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; Currently HTTPS is not supported when running Hoverfly as a webserver. HTTPS support when running as a webserver is on the roadmap.&lt;/p&gt;
+
+&lt;p&gt;Provided you have previously captured traffic either using cURL or by running tests with Hoverfly running as a proxy (or you have imported previously captured traffic - see the &lt;strong&gt;Exporting and importing&lt;/strong&gt; section), Hoverfly can now be used instead of the external service you captured.&lt;/p&gt;
+
+&lt;p&gt;Since Hoverfly is simulating the service as a &lt;em&gt;webserver&lt;/em&gt; rather than a &lt;em&gt;proxy&lt;/em&gt;, you will need to substitute the host name of the service you captured with the host and port that the Hoverfly webserver is running on when you make a request.&lt;/p&gt;
+
+&lt;p&gt;For example, if you created a simulation by running the following command with Hoverfly running in &lt;em&gt;capture&lt;/em&gt; mode as a &lt;strong&gt;proxy&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;curl http://my.host.com/api/health
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You would need to run the following command with Hoverfly running in &lt;em&gt;simulate&lt;/em&gt; mode as a &lt;strong&gt;webserver&lt;/strong&gt; to get the captured response:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;curl http://${HOVERFLY_HOST}:8500/api/health
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;what-is-happening-1&#34;&gt;What is happening?&lt;/h3&gt;
+
+&lt;p&gt;Hoverfly is no longer passing requests through to the external service. Instead, for each request it receives, it is returning a matched response from its cache. The cache is stored in memory, and persisted on disk in the &lt;code&gt;requets.db&lt;/code&gt; file.&lt;/p&gt;
+
+&lt;h3 id=&#34;next-steps-1&#34;&gt;Next steps&lt;/h3&gt;
+
+&lt;p&gt;Now you have simulated a service, you can use middleware to simulate network latency or failure, or manipulate data in the responses. Proceed to the &lt;strong&gt;Middleware&lt;/strong&gt; section.&lt;/p&gt;
+
+&lt;p&gt;Alternatively, you can learn how to use &lt;em&gt;synthesize mode&lt;/em&gt; to generate responses to requests on the fly. Proceed to the &lt;strong&gt;Creating synthetic services&lt;/strong&gt; section.&lt;/p&gt;
+
+&lt;h3 id=&#34;further-reading-1&#34;&gt;Further reading&lt;/h3&gt;
+
+&lt;p&gt;A detailed step-by-step guide to capturing traffic and creating a simulated service is available here:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://specto.io/blog/speeding-up-your-slow-dependencies.html&#34;&gt;Speeding up your slow dependencies&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;A guide on how to capture and simulate the Meetup API is available here:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://specto.io/blog/hoverfly-meetup-api.html&#34;&gt;Virtualizing the Meetup API&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;simulating-service-latency&#34;&gt;Simulating service latency&lt;/h2&gt;
+
+&lt;p&gt;Once you have created a simulated service by capturing traffic between your application and an external service, you may wish to make the simulation more &amp;ldquo;realistic&amp;rdquo; by applying latency to the responses returned by Hoverfly.&lt;/p&gt;
+
+&lt;p&gt;This could be done using middleware (See the &lt;strong&gt;Using middleware&lt;/strong&gt; section). However, if you do not want to go to the effort of writing a middleware script, you can use a JSON file to apply a set of fixed response delays to the Hoverfly simulation.&lt;/p&gt;
+
+&lt;p&gt;This method is useful if Hoverfly is being used in a load test to simulate an external service, and there is a requirement to simulate external service latency. Under high load, the overhead of executing middleware scripts will impact the performance of Hoverfly, making the middleware approach to adding latency unsuitable.&lt;/p&gt;
+
+&lt;h3 id=&#34;set-up-2&#34;&gt;Set up&lt;/h3&gt;
+
+&lt;p&gt;To simulate service latency, you will need to have created a simulation by capturing traffic (see the &lt;strong&gt;Capturing traffic&lt;/strong&gt; and &lt;strong&gt;Simulating services&lt;/strong&gt; sections).&lt;/p&gt;
+
+&lt;h3 id=&#34;simulate-latency&#34;&gt;Simulate latency&lt;/h3&gt;
+
+&lt;h4 id=&#34;json-configuration&#34;&gt;JSON configuration&lt;/h4&gt;
+
+&lt;p&gt;To simulate latency, Hoverfly can be configured to apply a delay to individual hosts or API endpoints in the simulation using a JSON configuration file. This is done using a regular expression to match against the URL, a delay value in milliseconds, and an optional HTTP method value.&lt;/p&gt;
+
+&lt;p&gt;For example, to apply a delay of 2 seconds to all hosts in the simulation:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+  &amp;quot;data&amp;quot;: [
+    {
+      &amp;quot;urlPattern&amp;quot;: &amp;quot;.&amp;quot;,
+      &amp;quot;delay&amp;quot;: 2000
+    }
+  ]
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To apply a delay of 1 second to &lt;code&gt;1.myhost.com&lt;/code&gt; and a delay of 2 seconds to &lt;code&gt;2.myhost.com&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+  &amp;quot;data&amp;quot;: [
+    {
+      &amp;quot;urlPattern&amp;quot;: &amp;quot;1\\.myhost\\.com&amp;quot;,
+      &amp;quot;delay&amp;quot;: 1000
+    },
+    {
+      &amp;quot;urlPattern&amp;quot;: &amp;quot;2\\.myhost\\.com&amp;quot;,
+      &amp;quot;delay&amp;quot;: 2000
+    }
+  ]
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It is also possible to apply delays to specific resources and endpoints in your API. In the following example, a delay of 1 second is applied to all endpoints of resource A. For resource B, a delay of 1 second is applied to the GET endpoint, but a different delay of 2 seconds is applied to the POST endpoint:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+  &amp;quot;data&amp;quot;: [
+    {
+      &amp;quot;urlPattern&amp;quot;: &amp;quot;myhost\\.com\\/A&amp;quot;,
+      &amp;quot;delay&amp;quot;: 1000
+    },
+    {
+      &amp;quot;urlPattern&amp;quot;: &amp;quot;myhost\\.com\\/B&amp;quot;,
+      &amp;quot;delay&amp;quot;: 1000,
+      &amp;quot;httpMethod&amp;quot;: &amp;quot;GET&amp;quot;
+    },
+    {
+      &amp;quot;urlPattern&amp;quot;: &amp;quot;myhost\\.com\\/B&amp;quot;,
+      &amp;quot;delay&amp;quot;: 2000,
+      &amp;quot;httpMethod&amp;quot;: &amp;quot;POST&amp;quot;
+    }
+  ]
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;strong&gt;delays will be matched in the order that they appear in the JSON configuration file&lt;/strong&gt;. In the following example, &lt;code&gt;&amp;quot;urlPattern&amp;quot;:&amp;quot;.&amp;quot;&lt;/code&gt; matches all hosts, overriding &lt;code&gt;&amp;quot;urlPattern&amp;quot;: &amp;quot;1\\.myhost\\.com&amp;quot;&lt;/code&gt; and all subsequent matches, applying a 3 second delay to all responses:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+  &amp;quot;data&amp;quot;: [
+    {
+      &amp;quot;urlPattern&amp;quot;: &amp;quot;.&amp;quot;,
+      &amp;quot;delay&amp;quot;: 3000
+    },
+    {
+      &amp;quot;urlPattern&amp;quot;: &amp;quot;1\\.myhost\\.com&amp;quot;,
+      &amp;quot;delay&amp;quot;: 1000
+    }
+  ]
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;applying-the-configuration&#34;&gt;Applying the configuration&lt;/h4&gt;
+
+&lt;p&gt;The configuration can be applied using hoverctl.&lt;/p&gt;
+
+&lt;p&gt;To apply delays:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hoverctl delays path/to/my_delays.json
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To view the delays which have been applied:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hoverctl delays
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Alternatively, the configuration can be applied using the Hoverfly API directly:&lt;/p&gt;
+
+&lt;p&gt;To apply delays:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;curl -H &amp;quot;Content-Type application/json&amp;quot; -X PUT -d &#39;{&amp;quot;data&amp;quot;:[{&amp;quot;urlPattern&amp;quot;:&amp;quot;1\\.myhost\\.com&amp;quot;,&amp;quot;delay&amp;quot;:1000},{&amp;quot;urlPattern&amp;quot;:&amp;quot;2\\.myhost\\.com&amp;quot;,&amp;quot;delay&amp;quot;:2000}]}&#39; http://${HOVERFLY_HOST}:8888/api/delays
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To view the delays which have been applied&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;curl http://${HOVERFLY_HOST}:8888/api/delays
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;managing-simulation-data&#34;&gt;Managing simulation data&lt;/h2&gt;
+
+&lt;p&gt;Hoverfly can export and import service data in JSON format. This is useful if:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;You have captured some traffic and want to store it somewhere other than the Hoverfly &lt;code&gt;requests.db&lt;/code&gt; file - in a Git repository for example.&lt;/li&gt;
+&lt;li&gt;You are running Hoverfly in a Docker container - so persisting data on disk is not ideal&lt;/li&gt;
+&lt;li&gt;You want to capture traffic, then modify it somehow before re-importing it&lt;/li&gt;
+&lt;li&gt;You want to share your service data someone else&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;exporting-captured-data&#34;&gt;Exporting captured data&lt;/h3&gt;
+
+&lt;p&gt;Using hoverctl, you can export all the simulation data from Hoverfly. Exported data will be written to a JSON file in your current working directory.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hoverctl export mysimulation.json
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For more information about hoverctl, &lt;a href=&#34;../reference/hoverctl.md&#34;&gt;check here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;simulation-data-json-format&#34;&gt;Simulation data JSON format&lt;/h3&gt;
+
+&lt;p&gt;Hoverfly stores captured &lt;strong&gt;Request Response Pairs&lt;/strong&gt; (i.e. &amp;ldquo;traffic&amp;rdquo;) in the following JSON structure:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+	&amp;quot;data&amp;quot;: {
+		&amp;quot;pairs&amp;quot;: [{
+			&amp;quot;response&amp;quot;: {
+				&amp;quot;status&amp;quot;: 200,
+				&amp;quot;body&amp;quot;: &amp;quot;body here&amp;quot;,
+				&amp;quot;encodedBody&amp;quot;: false,
+				&amp;quot;headers&amp;quot;: {
+					&amp;quot;Content-Type&amp;quot;: [&amp;quot;text/html; charset=utf-8&amp;quot;]
+				}
+			},
+			&amp;quot;request&amp;quot;: {
+				&amp;quot;requestType&amp;quot;: &amp;quot;recording&amp;quot;,
+				&amp;quot;path&amp;quot;: &amp;quot;/&amp;quot;,
+				&amp;quot;method&amp;quot;: &amp;quot;GET&amp;quot;,
+				&amp;quot;destination&amp;quot;: &amp;quot;myhost.io&amp;quot;,
+				&amp;quot;scheme&amp;quot;: &amp;quot;https&amp;quot;,
+				&amp;quot;query&amp;quot;: &amp;quot;&amp;quot;,
+				&amp;quot;body&amp;quot;: &amp;quot;&amp;quot;,
+				&amp;quot;headers&amp;quot;: {
+					&amp;quot;Accept&amp;quot;: [&amp;quot;text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8&amp;quot;],
+					&amp;quot;User-Agent&amp;quot;: [&amp;quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36&amp;quot;]
+				}
+			}
+		}]
+	}
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;When you export a simulation that you have captured, the JSON file will look something like this. Notice that by default, the request &lt;code&gt;requestType&lt;/code&gt; is &lt;code&gt;recording&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h4 id=&#34;base64-encoding-binary-data&#34;&gt;Base64 encoding binary data&lt;/h4&gt;
+
+&lt;p&gt;As JSON does not support binary data, binary responses are base64 encoded.  This is denoted by the &lt;code&gt;encodedBody&lt;/code&gt; field.  Hoverfly automatically encodes and decodes the data during the export and import processes.&lt;/p&gt;
+
+&lt;h4 id=&#34;a-note-about-matching&#34;&gt;A note about matching&lt;/h4&gt;
+
+&lt;p&gt;Hoverfly works by inspecting requests being made, extracting key pieces of information and then matching them against stored requests. Standard matching uses everything in the request apart from headers. (This because request headers often change depending on browser, HTTP client and or the time of day.)&lt;/p&gt;
+
+&lt;p&gt;In some cases, you may want to use partial matching. For example, you may want Hoverfly to return a specific response for &lt;strong&gt;any&lt;/strong&gt; incoming request going to a specific path. This can be achieved using request templates.&lt;/p&gt;
+
+&lt;h4 id=&#34;request-templates-for-partial-matching&#34;&gt;Request templates (for partial matching)&lt;/h4&gt;
+
+&lt;p&gt;If no exact match is found for an incoming request, Hoverfly will attempt to match on request templates.&lt;/p&gt;
+
+&lt;p&gt;Request templates are defined in the JSON file by setting the &lt;code&gt;requestType&lt;/code&gt; property for a request to &lt;code&gt;template&lt;/code&gt; and including &lt;strong&gt;only&lt;/strong&gt; the information in the request that you want Hoverfly to use in the match.&lt;/p&gt;
+
+&lt;p&gt;For example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+    &amp;quot;data&amp;quot;: {
+        &amp;quot;pairs&amp;quot;: [{
+            &amp;quot;response&amp;quot;: {
+                &amp;quot;status&amp;quot;: 200,
+                &amp;quot;body&amp;quot;: &amp;quot;&amp;lt;h1&amp;gt;Matched on template&amp;lt;/h1&amp;gt;&amp;quot;,
+                &amp;quot;encodedBody&amp;quot;: false,
+                &amp;quot;headers&amp;quot;: {
+                    &amp;quot;Content-Type&amp;quot;: [&amp;quot;text/html; charset=utf-8&amp;quot;]
+                }
+            },
+            &amp;quot;request&amp;quot;: {
+                &amp;quot;requestType&amp;quot;: &amp;quot;template&amp;quot;,
+                &amp;quot;path&amp;quot;: &amp;quot;/template&amp;quot;
+            }
+        }]
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here, any request with the path &lt;code&gt;/template&lt;/code&gt; will return the same response.&lt;/p&gt;
+
+&lt;p&gt;For looser matching, it is possible to use a wildcard to substitute characters. This is achieved by using an &lt;code&gt;*&lt;/code&gt; symbol. This will match any number of characters, and is case sensitive.&lt;/p&gt;
+
+&lt;p&gt;It is possible to combine the wildcard (&lt;code&gt;*&lt;/code&gt;) with characters to substitute parts of a string. In the next example, we use a wildcard the replace part of a URL path. This allows us to match on either &lt;code&gt;/api/v1/template&lt;/code&gt; or &lt;code&gt;/api/v2/template&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+    &amp;quot;data&amp;quot;: {
+        &amp;quot;pairs&amp;quot;: [{
+            &amp;quot;response&amp;quot;: {
+                &amp;quot;status&amp;quot;: 200,
+                &amp;quot;body&amp;quot;: &amp;quot;&amp;lt;h1&amp;gt;Matched on template&amp;lt;/h1&amp;gt;&amp;quot;,
+                &amp;quot;encodedBody&amp;quot;: false,
+                &amp;quot;headers&amp;quot;: {
+                    &amp;quot;Content-Type&amp;quot;: [&amp;quot;text/html; charset=utf-8&amp;quot;]
+                }
+            },
+            &amp;quot;request&amp;quot;: {
+                &amp;quot;requestType&amp;quot;: &amp;quot;template&amp;quot;,
+                &amp;quot;path&amp;quot;: &amp;quot;/api/*/template&amp;quot;
+            }
+        }]
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The JSON file can contain both requests recordings and request templates:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+    &amp;quot;data&amp;quot;: {
+        &amp;quot;pairs&amp;quot;: [{
+            &amp;quot;response&amp;quot;: {
+                &amp;quot;status&amp;quot;: 200,
+                &amp;quot;body&amp;quot;: &amp;quot;&amp;lt;h1&amp;gt;Matched on recording&amp;lt;/h1&amp;gt;&amp;quot;,
+                &amp;quot;encodedBody&amp;quot;: false,
+                &amp;quot;headers&amp;quot;: {
+                    &amp;quot;Content-Type&amp;quot;: [
+                        &amp;quot;text/html; charset=utf-8&amp;quot;
+                    ]
+                }
+            },
+            &amp;quot;request&amp;quot;: {
+                &amp;quot;requestType&amp;quot;: &amp;quot;recording&amp;quot;,
+                &amp;quot;path&amp;quot;: &amp;quot;/&amp;quot;,
+                &amp;quot;method&amp;quot;: &amp;quot;GET&amp;quot;,
+                &amp;quot;destination&amp;quot;: &amp;quot;myhost.io&amp;quot;,
+                &amp;quot;scheme&amp;quot;: &amp;quot;https&amp;quot;,
+                &amp;quot;query&amp;quot;: &amp;quot;&amp;quot;,
+                &amp;quot;body&amp;quot;: &amp;quot;&amp;quot;,
+                &amp;quot;headers&amp;quot;: {
+                    &amp;quot;Accept&amp;quot;: [
+                        &amp;quot;text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8&amp;quot;
+                    ],
+                    &amp;quot;Content-Type&amp;quot;: [
+                        &amp;quot;text/plain; charset=utf-8&amp;quot;
+                    ],
+                    &amp;quot;User-Agent&amp;quot;: [
+                        &amp;quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36&amp;quot;
+                    ]
+                }
+            }
+        }, {
+            &amp;quot;response&amp;quot;: {
+                &amp;quot;status&amp;quot;: 200,
+                &amp;quot;body&amp;quot;: &amp;quot;&amp;lt;h1&amp;gt;Matched on template&amp;lt;/h1&amp;gt;&amp;quot;,
+                &amp;quot;encodedBody&amp;quot;: false,
+                &amp;quot;headers&amp;quot;: {
+                    &amp;quot;Content-Type&amp;quot;: [
+                        &amp;quot;text/html; charset=utf-8&amp;quot;
+                    ]
+                }
+            },
+            &amp;quot;request&amp;quot;: {
+                &amp;quot;requestType&amp;quot;: &amp;quot;template&amp;quot;,
+                &amp;quot;path&amp;quot;: &amp;quot;/template&amp;quot;,
+                &amp;quot;method&amp;quot;: null,
+                &amp;quot;destination&amp;quot;: null,
+                &amp;quot;scheme&amp;quot;: null,
+                &amp;quot;query&amp;quot;: null,
+                &amp;quot;body&amp;quot;: null,
+                &amp;quot;headers&amp;quot;: null
+            }
+        }],
+        &amp;quot;globalActions&amp;quot;: {
+            &amp;quot;delays&amp;quot;: []
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;A standard workflow might be:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Capture some traffic&lt;/li&gt;
+&lt;li&gt;Export it to JSON&lt;/li&gt;
+&lt;li&gt;Edit the JSON to set certain requests to templates, removing the properties for these requests that should be excluded from the match&lt;/li&gt;
+&lt;li&gt;Re-import the JSON to Hoverfly&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;If the &lt;code&gt;requestType&lt;/code&gt; property is not defined or not recognized, Hoverfly will treat a request as a recording.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;importing-simulation-data&#34;&gt;Importing simulation data&lt;/h2&gt;
+
+&lt;p&gt;Service data can be imported from the local file system, or from a URL. After you have edited captured data to include some request templates, you will probably want to import it back into Hoverfly. There are four ways to do this.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;A:&lt;/strong&gt; Use hoverctl to load a file into Hoverfly:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hoverctl import simulation.json
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For more about hoverctl, &lt;a href=&#34;../reference/hoverctl.md&#34;&gt;check here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;B:&lt;/strong&gt; Start Hoverfly in &lt;em&gt;simulate mode&lt;/em&gt; with the &lt;code&gt;-import&lt;/code&gt; flag:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;./hoverfly -import path/to/data.json
+./hoverfly -import https://&amp;lt;MY_HOST&amp;gt;/data.json
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Multiple service data files can be imported like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;./hoverfly -import path/to/data_1.json -import path/to/data_2.json
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If the file you specified cannot be found, Hoverfly will not start.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;C:&lt;/strong&gt; Use the &lt;code&gt;HoverflyImport&lt;/code&gt; environment variable:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;export HoverflyImport=&amp;quot;path/to/data.json&amp;quot;
+export HoverflyImport=&amp;quot;https://&amp;lt;MY_HOST&amp;gt;/data.json&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If the file you specified cannot be found, Hoverfly will not start.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;D:&lt;/strong&gt; Make an API call:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;curl --data &amp;quot;@/path/to/data.json&amp;quot; http://${HOVERFLY_HOST}:8888/api/v2/simulation
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;using-middleware&#34;&gt;Using middleware&lt;/h2&gt;
+
+&lt;p&gt;Hoverfly middleware can be written in any language. Middleware modules receive a service data JSON string via the standard input (STDIN) and must return a service data JSON string to the standard output (STDOUT).&lt;/p&gt;
+
+&lt;p&gt;The way middleware is applied to the requests and/or the responses depends on the mode:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Capture: Calls middleware once with an outgoing request object&lt;/li&gt;
+&lt;li&gt;Simulate: Calls middleware once with both request and response objects but any modifications will only affect the response&lt;/li&gt;
+&lt;li&gt;Synthesize: Calls middleware once with a request object so that the middleware can create a response&lt;/li&gt;
+&lt;li&gt;Modify Mode: Calls middleware twice, the first with a request object so that the request can be modified and then a second time with both the request and the response&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;In &lt;em&gt;simulate mode&lt;/em&gt;, middleware is only executed when a request is matched to a stored response&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;To implement more dynamic behaviour, middleware should be combined with Hoverfly&amp;rsquo;s &lt;em&gt;synthesize mode&lt;/em&gt; (see the &lt;strong&gt;Creating synthetic services&lt;/strong&gt; section).&lt;/p&gt;
+
+&lt;h3 id=&#34;simple-middleware-examples&#34;&gt;Simple middleware examples&lt;/h3&gt;
+
+&lt;p&gt;Please read the &lt;strong&gt;Installation and setup&lt;/strong&gt;, &lt;strong&gt;Capturing traffic&lt;/strong&gt; and &lt;strong&gt;Simulating services&lt;/strong&gt; sections (if you haven&amp;rsquo;t already) before proceeding.&lt;/p&gt;
+
+&lt;p&gt;Middleware is set using hoverctl.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hoverctl middleware &amp;quot;path/to/script&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can also set the middleware on start up with the Hoverfly binary&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;./hoverfly -middleware &amp;quot;path/to/script&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This will start Hoverfly in the default mode (&lt;em&gt;simulate mode&lt;/em&gt;) and import a middleware script.&lt;/p&gt;
+
+&lt;p&gt;The string supplied as middleware can contain commands as well as a path to a file. For example, if you have written middleware in Go:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;./hoverfly -middleware &amp;quot;go run path/to/file.go&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;hoverctl middleware &amp;quot;go run path/to/file.go&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;python-example&#34;&gt;Python example&lt;/h4&gt;
+
+&lt;p&gt;This example will change the response code and body in each response, and add 2 seconds of delay (simulating network latency).&lt;/p&gt;
+
+&lt;p&gt;Ensure that you have captured some traffic with Hoverfly.&lt;/p&gt;
+
+&lt;p&gt;Ensure that you have Python installed.&lt;/p&gt;
+
+&lt;p&gt;Save the following code into a file named &lt;code&gt;example.py&lt;/code&gt; and make it executable (&lt;code&gt;chmod +x example.py&lt;/code&gt;):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#!/usr/bin/env python
+import sys
+import logging
+import json
+from time import sleep
+
+logging.basicConfig(filename=&#39;middleware.log&#39;, level=logging.DEBUG)
+logging.debug(&#39;Middleware is called&#39;)
+
+def main():
+    data = sys.stdin.readlines()
+    # this is a json string in one line so we are interested in that one line
+    payload = data[0]
+    logging.debug(payload)
+
+    payload_dict = json.loads(payload)
+
+    payload_dict[&#39;response&#39;][&#39;status&#39;] = 201
+    payload_dict[&#39;response&#39;][&#39;body&#39;] = &amp;quot;body was replaced by middleware&amp;quot;
+
+    # now let&#39; sleep for 2 seconds
+    sleep(2)
+
+    # returning new payload
+    print(json.dumps(payload_dict))
+
+if __name__ == &amp;quot;__main__&amp;quot;:
+    main()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Retart Hoverfly in &lt;em&gt;simulate mode&lt;/em&gt; with the &lt;code&gt;example.py&lt;/code&gt; script specified as middleware:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hoverctl middleware &amp;quot;./example.py&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Repeat the steps you took to capture the traffic.&lt;/p&gt;
+
+&lt;p&gt;You will notice that every response will have the &lt;code&gt;201&lt;/code&gt; status code, and the body will have been replaced by the string specified in the script.&lt;/p&gt;
+
+&lt;p&gt;There will also be a 2 second delay between each request and the response.&lt;/p&gt;
+
+&lt;h4 id=&#34;javascript-example&#34;&gt;Javascript example&lt;/h4&gt;
+
+&lt;p&gt;This example will change the response code and body in each response.&lt;/p&gt;
+
+&lt;p&gt;Ensure that you have captured some traffic with Hoverfly.&lt;/p&gt;
+
+&lt;p&gt;Ensure that you have NodeJS installed.&lt;/p&gt;
+
+&lt;p&gt;Save the following code into a file named &lt;code&gt;example.js&lt;/code&gt; and make it executable (&lt;code&gt;chmod +x example.js&lt;/code&gt;):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#!/usr/bin/env node
+
+process.stdin.resume();  
+process.stdin.setEncoding(&#39;utf8&#39;);  
+process.stdin.on(&#39;data&#39;, function(data) {
+  var parsed_json = JSON.parse(data);
+  // changing response
+  parsed_json.response.status = 201;
+  parsed_json.response.body = &amp;quot;body was replaced by JavaScript middleware\n&amp;quot;;
+
+  // stringifying JSON response
+  var newJsonString = JSON.stringify(parsed_json);
+
+  process.stdout.write(newJsonString);
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Restart Hoverfly in &lt;em&gt;simulate mode&lt;/em&gt; with the &lt;code&gt;example.js&lt;/code&gt; script specified as middleware:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hoverctl middleware &amp;quot;./example.js&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Repeat the steps you took to capture the traffic.&lt;/p&gt;
+
+&lt;p&gt;You will notice that every response will have the &lt;code&gt;201&lt;/code&gt; status code, and the body will have been replaced by the string specified in the script.&lt;/p&gt;
+
+&lt;h3 id=&#34;remote-execution-of-middleware&#34;&gt;Remote execution of middleware&lt;/h3&gt;
+
+&lt;p&gt;The examples above show how to execute middleware on the machine on which Hoverfly is running. It is also possible to execute middleware remotely over HTTP.&lt;/p&gt;
+
+&lt;p&gt;For example, you could write a piece of middleware using &lt;a href=&#34;https://docs.aws.amazon.com/lambda/latest/dg/welcome.html&#34;&gt;AWS Lambda&lt;/a&gt; and then provide the URL to Hoverfly as middleware.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hoverctl middleware &amp;quot;https://1sfefc4.execute-api.eu-west-1.amazonaws.com/remote/middleware&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Remote middleare execution works in a similar way to local middleware execution. Hoverfly will send the same JSON data to the middleware, but instead of sending it via &lt;code&gt;stdin&lt;/code&gt;, it is sent as a POST request to the specified URL. The middleware is then expected to return the same data as it would to &lt;code&gt;stdout&lt;/code&gt; to the response body.&lt;/p&gt;
+
+&lt;h3 id=&#34;base64-encoding-binary-data-1&#34;&gt;Base64 encoding binary data&lt;/h3&gt;
+
+&lt;p&gt;The above example assumes that the responses do not contain binary data.  If they do then the &lt;code&gt;encodedBody&lt;/code&gt; field will be set to &lt;code&gt;true&lt;/code&gt;.  In this circumstance, if you want to mutate the body you must base64 encode and decode it.&lt;/p&gt;
+
+&lt;p&gt;It is also worth bearing in mind that the &amp;ldquo;Content-Length&amp;rdquo; header must be set to the length of the unencoded body.&lt;/p&gt;
+
+&lt;h3 id=&#34;further-reading-2&#34;&gt;Further reading&lt;/h3&gt;
+
+&lt;p&gt;A detailed step-by-step guide to using middleware is available here:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://specto.io/blog/service-virtualization-is-so-last-year.html&#34;&gt;Modifying traffic on the fly&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;More middleware examples are available here:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/SpectoLabs/hoverfly/tree/master/examples/middleware&#34;&gt;Middleware examples&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Currently, middleware is not supported by hoverctl.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;creating-synthetic-services&#34;&gt;Creating synthetic services&lt;/h2&gt;
+
+&lt;p&gt;In &lt;em&gt;synthesize mode&lt;/em&gt;, Hoverfly does not make use of its cache. &lt;em&gt;Synthesize mode&lt;/em&gt; is dependent on middleware. For each request that Hoverfly receives, it executes middleware, which must generate a response. Hoverfly then returns the generated response to the client.&lt;/p&gt;
+
+&lt;p&gt;This mode allows you use Hoverfly as a dynamic stub server. For example, you could use it with a set of template responses stored on a file system or in a database, which could be populated with data and returned based on any characteristic in the request.&lt;/p&gt;
+
+&lt;p&gt;TODO&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;modifying-traffic&#34;&gt;Modifying traffic&lt;/h2&gt;
+
+&lt;p&gt;In &lt;em&gt;modify mode&lt;/em&gt;, Hoverfly does not make use of its cache. Traffic is passed through Hoverfly, and middleware is executed both on out-going and in-bound traffic. In this mode, Middleware can be used to manipulate any part of a request or a response.&lt;/p&gt;
+
+&lt;p&gt;This is a mode with potential applications outside of simulating external services for development and testing. Possible use-cases include introducing transparent redirects and injecting authentication headers.&lt;/p&gt;
+
+&lt;h3 id=&#34;set-up-3&#34;&gt;Set up&lt;/h3&gt;
+
+&lt;p&gt;You will need to have your application or OS configured to use Hoverfly as a proxy (see the &lt;strong&gt;Installation and setup&lt;/strong&gt; section).&lt;/p&gt;
+
+&lt;p&gt;To modify traffic on the fly, you do not need to have captured any traffic or imported any Hoverfly JSON. However, it is important that you read the &lt;strong&gt;Middleware&lt;/strong&gt; section first, if you haven&amp;rsquo;t already.&lt;/p&gt;
+
+&lt;p&gt;For the example below, you will also need Python installed on the Hoverfly host.&lt;/p&gt;
+
+&lt;h3 id=&#34;modify-some-traffic&#34;&gt;Modify some traffic&lt;/h3&gt;
+
+&lt;h4 id=&#34;create-a-middleware-script&#34;&gt;Create a middleware script&lt;/h4&gt;
+
+&lt;p&gt;First, create a middleware script to modify traffic. Save the following code in a file named &lt;code&gt;modify.py&lt;/code&gt; in your Hoverfly directory and make it executable with &lt;code&gt;chmod +x modify.py&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#!/usr/bin/env python
+
+import sys
+import json
+import logging
+
+logging.basicConfig(filename=&#39;middleware.log&#39;, level=logging.DEBUG)
+logging.debug(&#39;Middleware &amp;quot;modify_request&amp;quot; called&#39;)
+
+
+def main():
+    data = sys.stdin.readlines()
+    # this is a json string in one line so we are interested in that one line
+    payload = data[0]
+    logging.debug(payload)
+
+    payload_dict = json.loads(payload)
+
+    payload_dict[&#39;request&#39;][&#39;destination&#39;] = &amp;quot;mirage.readthedocs.org&amp;quot;
+    payload_dict[&#39;request&#39;][&#39;method&#39;] = &amp;quot;GET&amp;quot;
+
+    payload_dict[&#39;response&#39;][&#39;status&#39;] = 201
+    # returning new payload
+    print(json.dumps(payload_dict))
+
+if __name__ == &amp;quot;__main__&amp;quot;:
+    main()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This middleware script will transparently redirect &lt;strong&gt;any&lt;/strong&gt; request to &lt;strong&gt;any host&lt;/strong&gt; that is passed through Hoverfly to &lt;code&gt;http://mirage.readthedocs.org&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h4 id=&#34;put-hoverfly-into-modify-mode&#34;&gt;Put Hoverfly into Modify mode&lt;/h4&gt;
+
+&lt;p&gt;There are three ways of doing this:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;A:&lt;/strong&gt; Start Hoverfly with the &lt;code&gt;-modify&lt;/code&gt; flag and specify middleware with the &lt;code&gt;-middleware&lt;/code&gt; flag:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;./hoverfly -modify -middleware &amp;quot;modify.py&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;B:&lt;/strong&gt; Ensure Hoverfly is running (in any mode), and that the middleware has been specified, then select &amp;ldquo;modify&amp;rdquo; in the Admin UI which is available at &lt;code&gt;http://${HOVERFLY_HOST}:8888&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;C:&lt;/strong&gt; Ensure Hoverfly is running (in any mode), and that the middleware has been specified, then make an API call:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;curl -H &amp;quot;Content-Type application/json&amp;quot; -X POST -d &#39;{&amp;quot;mode&amp;quot;:&amp;quot;modify&amp;quot;}&#39; http://${HOVERFLY_HOST}:8888/api/v2/hoverfly/mode
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now cURL any (HTTP) URL with Hoverfly as a proxy. For example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;curl http://flask.readthedocs.org/ --proxy http://${HOVERFLY_HOST}:8500/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You will see that the response comes from &lt;code&gt;http://mirage.readthedocs.org&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;what-is-happening-2&#34;&gt;What is happening?&lt;/h3&gt;
+
+&lt;p&gt;Hoverfly is executing the &lt;code&gt;modify.py&lt;/code&gt; script on the request and the response. The middleware takes the service data JSON string via STDIN, and replaces the &lt;code&gt;destination&lt;/code&gt; with the string &lt;code&gt;mirage.readthedocs.org&lt;/code&gt;. It also takes the response JSON string via STDIN and replaces the &lt;code&gt;method&lt;/code&gt; with &lt;code&gt;201&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;further-reading-3&#34;&gt;Further reading&lt;/h3&gt;
+
+&lt;p&gt;This example is taken from a more detailed step-by-step guide:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://specto.io/blog/service-virtualization-is-so-last-year.html&#34;&gt;Modifying traffic on the fly&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;filtering-destination-urls-and-hosts&#34;&gt;Filtering destination URLs and hosts&lt;/h2&gt;
+
+&lt;p&gt;You may wish to control what Hoverfly captures or simulates. By default, Hoverfly will process everything.&lt;/p&gt;
+
+&lt;p&gt;To specify which URLs Hoverfly processes you can either use the &lt;code&gt;-destination&lt;/code&gt; flag on startup to supply a regular expression:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;./hoverfly -destination=&amp;quot;&amp;lt;my_regex&amp;gt;&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Or you can supply multiple hosts using the &lt;code&gt;-dest&lt;/code&gt; flag on startup:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;./hoverfly -dest www.myservice1.org -dest www.myservice2.org -dest www.myservice3.org
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can also set the destination host using the API:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;curl -H &amp;quot;Content-Type application/json&amp;quot; -X POST -d &#39;{&amp;quot;destination&amp;quot;: &amp;quot;www.myservice1.org&amp;quot;}&#39; http://${HOVERFLY_HOST}:8888/api/v2/hoverfly/destination
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Hoverfly will then process only those requests which match the specified destination.&lt;/p&gt;
+
+&lt;p&gt;All other requests will be passed through. This allows you to start by simulating just a few services.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;https-support-certificate-management&#34;&gt;HTTPS support &amp;amp; certificate management&lt;/h2&gt;
+
+&lt;p&gt;Hoverfly ships with a default certificate (&lt;code&gt;cert.pem&lt;/code&gt; in the repository root directory). To use Hoverfly with HTTPS traffic, you will need to add this default certificate to your trust store.&lt;/p&gt;
+
+&lt;p&gt;Using Hoverfly, you may also generate new certificates.&lt;/p&gt;
+
+&lt;h3 id=&#34;generating-and-using-certificates&#34;&gt;Generating and using certificates&lt;/h3&gt;
+
+&lt;p&gt;To enable support for HTTPS services, Hoverfly can generate public and private keys. To generate a key pair, use the &lt;code&gt;-generate-ca-cert&lt;/code&gt; flag:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;./hoverfly -generate-ca-cert
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This will create &lt;code&gt;cert.pem&lt;/code&gt; and a &lt;code&gt;key.pem&lt;/code&gt; files in your current directory. Next time you run Hoverfly, you can tell it to use these certificate and key files using the &lt;code&gt;-cert&lt;/code&gt; and &lt;code&gt;-key&lt;/code&gt; flags:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;./hoverfly -cert cert.pem -key key.pem
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You will then need to add the &lt;code&gt;cert.pem&lt;/code&gt; file to your trusted certificates. Alternatively, you can turn off certificate verification. For example, to make insecure requests with cURL, you can use the &lt;code&gt;-k&lt;/code&gt; flag:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;curl https://www.bbc.co.uk --proxy http://${HOVERFLY_HOST}:8500 -k
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;turn-off-verification-when-capturing-or-modifying-traffic&#34;&gt;Turn off verification when capturing or modifying traffic&lt;/h3&gt;
+
+&lt;p&gt;You can tell Hoverfly to ignore untrusted certificates when capturing or modifying traffic in two ways.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;A:&lt;/strong&gt; Use the &lt;code&gt;-tls-verification=false&lt;/code&gt; flag on startup:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;./hoverfly -tls-verification=false
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;B:&lt;/strong&gt; Set the &lt;code&gt;HoverflyTlsVerification&lt;/code&gt; environment variable:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;export HoverflyTlsVerification=false     
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;authentication&#34;&gt;Authentication&lt;/h2&gt;
+
+&lt;p&gt;Hoverfly uses a combination of Basic Auth and &lt;a href=&#34;https://jwt.io/&#34;&gt;JWT&lt;/a&gt; (JSON Web Tokens) to authenticate users. Authentication is disabled by default.&lt;/p&gt;
+
+&lt;h3 id=&#34;enabling-authentication&#34;&gt;Enabling authentication&lt;/h3&gt;
+
+&lt;p&gt;If you enable authentication, and you haven&amp;rsquo;t created a user using flags or environment variables (see below), you will be prompted to create a new user when you start Hoverfly.&lt;/p&gt;
+
+&lt;p&gt;To enable authentication, you can use the &lt;code&gt;-auth&lt;/code&gt; flag on startup:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;./hoverfly -auth
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Or you can use the &lt;code&gt;HoverflyAuthDisabled&lt;/code&gt; environment variable:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;export HoverflyAuthEnabled=true
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If the &lt;code&gt;-auth&lt;/code&gt; flag is supplied &lt;strong&gt;or&lt;/strong&gt; the &lt;code&gt;HoverflyAuthEnabled&lt;/code&gt; environment variable is set to &lt;code&gt;true&lt;/code&gt;, authentication will be enabled.&lt;/p&gt;
+
+&lt;p&gt;When authentication is disabled, &lt;strong&gt;any username and password combination&lt;/strong&gt; can be used to access the Admin UI.&lt;/p&gt;
+
+&lt;h3 id=&#34;adding-users&#34;&gt;Adding users&lt;/h3&gt;
+
+&lt;p&gt;You can add a user using the &lt;code&gt;-add&lt;/code&gt;, &lt;code&gt;-username&lt;/code&gt; and &lt;code&gt;-password&lt;/code&gt; flags at startup:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;./hoverfly -add -username &amp;lt;username&amp;gt; -password &amp;lt;password&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This will add an admin user. To add a non-admin user, use the &lt;code&gt;-admin&lt;/code&gt; flag:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;./hoverfly -add -username &amp;lt;username&amp;gt; -password &amp;lt;password&amp;gt; -admin false
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can also add an initial super user using environment variables. This is useful if you are using Hoverfly in Docker, for example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;export HoverflyAdmin=&amp;quot;username&amp;quot;
+export HoverflyAdminPass=&amp;quot;password&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;token-usage-for-api-authentication&#34;&gt;Token usage for API authentication&lt;/h3&gt;
+
+&lt;p&gt;To get the token for a user, make an API call:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;curl -H &amp;quot;Content-Type application/json&amp;quot; -X POST -d &#39;{&amp;quot;Username&amp;quot;: &amp;quot;&amp;lt;username&amp;gt;&amp;quot;, &amp;quot;Password&amp;quot;: &amp;quot;&amp;lt;password&amp;gt;&amp;quot;}&#39; http://${HOVERFLY_HOST}:8888/api/token-auth
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To use the token in an API call:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;curl -H &amp;quot;Authorization: Bearer &amp;lt;token&amp;gt;&amp;quot; http://${HOVERFLY_HOST}:8888/api/v2/simulation
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;By default, tokens expire after one day. You can override this by setting the &lt;code&gt;HoverflyTokenExpiration&lt;/code&gt; environment variable in seconds:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;export HoverflyTokenExpiration=3600
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;setting-the-hoverfly-secret&#34;&gt;Setting the Hoverfly secret&lt;/h3&gt;
+
+&lt;p&gt;By default, a new random secret will be generated every time you launch Hoverfly. However, you can specify a secret using the &lt;code&gt;HoverflySecret&lt;/code&gt; environment variable:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;export HoverflySecret=&amp;lt;my_secret&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Reference</title>
+      <link>http://hoverfly.io/reference/</link>
+      <pubDate>Fri, 11 Nov 2016 16:53:14 +0000</pubDate>
+      
+      <guid>http://hoverfly.io/reference/</guid>
+      <description>
+
+&lt;h2 id=&#34;api&#34;&gt;API&lt;/h2&gt;
+
+&lt;h3 id=&#34;get-api-v2-simulation&#34;&gt;GET /api/v2/simulation&lt;/h3&gt;
+
+&lt;p&gt;Gets all simulation data from the running instance of Hoverfly. This includes recordings, templates, delays and metadata.&lt;/p&gt;
+
+&lt;h4 id=&#34;example-response-body&#34;&gt;Example response body&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+  &amp;quot;data&amp;quot;: {
+    &amp;quot;pairs&amp;quot;: [
+      {
+        &amp;quot;response&amp;quot;: {
+          &amp;quot;status&amp;quot;: 200,
+          &amp;quot;body&amp;quot;: &amp;quot;&amp;lt;h1&amp;gt;Matched on recording&amp;lt;/h1&amp;gt;&amp;quot;,
+          &amp;quot;encodedBody&amp;quot;: false,
+          &amp;quot;headers&amp;quot;: {
+            &amp;quot;Content-Type&amp;quot;: [
+              &amp;quot;text/html; charset=utf-8&amp;quot;
+            ]
+          }
+        },
+        &amp;quot;request&amp;quot;: {
+          &amp;quot;requestType&amp;quot;: &amp;quot;recording&amp;quot;,
+          &amp;quot;path&amp;quot;: &amp;quot;/&amp;quot;,
+          &amp;quot;method&amp;quot;: &amp;quot;GET&amp;quot;,
+          &amp;quot;destination&amp;quot;: &amp;quot;myhost.io&amp;quot;,
+          &amp;quot;scheme&amp;quot;: &amp;quot;https&amp;quot;,
+          &amp;quot;query&amp;quot;: &amp;quot;&amp;quot;,
+          &amp;quot;body&amp;quot;: &amp;quot;&amp;quot;,
+          &amp;quot;headers&amp;quot;: {
+            &amp;quot;Accept&amp;quot;: [
+              &amp;quot;text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8&amp;quot;
+            ],
+            &amp;quot;Content-Type&amp;quot;: [
+              &amp;quot;text/plain; charset=utf-8&amp;quot;
+            ],
+            &amp;quot;User-Agent&amp;quot;: [
+              &amp;quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36&amp;quot;
+            ]
+          }
+        }
+      },
+      {
+        &amp;quot;response&amp;quot;: {
+          &amp;quot;status&amp;quot;: 200,
+          &amp;quot;body&amp;quot;: &amp;quot;&amp;lt;h1&amp;gt;Matched on template&amp;lt;/h1&amp;gt;&amp;quot;,
+          &amp;quot;encodedBody&amp;quot;: false,
+          &amp;quot;headers&amp;quot;: {
+            &amp;quot;Content-Type&amp;quot;: [
+              &amp;quot;text/html; charset=utf-8&amp;quot;
+            ]
+          }
+        },
+        &amp;quot;request&amp;quot;: {
+          &amp;quot;requestType&amp;quot;: &amp;quot;template&amp;quot;,
+          &amp;quot;path&amp;quot;: &amp;quot;/template&amp;quot;,
+          &amp;quot;method&amp;quot;: null,
+          &amp;quot;destination&amp;quot;: null,
+          &amp;quot;scheme&amp;quot;: null,
+          &amp;quot;query&amp;quot;: null,
+          &amp;quot;body&amp;quot;: null,
+          &amp;quot;headers&amp;quot;: null
+        }
+      }
+    ],
+    &amp;quot;globalActions&amp;quot;: {
+      &amp;quot;delays&amp;quot;: []
+    }
+  },
+  &amp;quot;meta&amp;quot;: {
+    &amp;quot;schemaVersion&amp;quot;: &amp;quot;v1&amp;quot;,
+    &amp;quot;hoverflyVersion&amp;quot;: &amp;quot;v0.9.0&amp;quot;,
+    &amp;quot;timeExported&amp;quot;: &amp;quot;2016-11-11T11:53:52Z&amp;quot;
+  }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&#34;put-api-v2-simulation&#34;&gt;PUT /api/v2/simulation&lt;/h3&gt;
+
+&lt;p&gt;Puts simulation into the running instance of Hoverfly, overwriting any existing simulation data.&lt;/p&gt;
+
+&lt;h4 id=&#34;example-request-body&#34;&gt;Example request body&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+  &amp;quot;data&amp;quot;: {
+    &amp;quot;pairs&amp;quot;: [
+      {
+        &amp;quot;response&amp;quot;: {
+          &amp;quot;status&amp;quot;: 200,
+          &amp;quot;body&amp;quot;: &amp;quot;&amp;lt;h1&amp;gt;Matched on recording&amp;lt;/h1&amp;gt;&amp;quot;,
+          &amp;quot;encodedBody&amp;quot;: false,
+          &amp;quot;headers&amp;quot;: {
+            &amp;quot;Content-Type&amp;quot;: [
+              &amp;quot;text/html; charset=utf-8&amp;quot;
+            ]
+          }
+        },
+        &amp;quot;request&amp;quot;: {
+          &amp;quot;requestType&amp;quot;: &amp;quot;recording&amp;quot;,
+          &amp;quot;path&amp;quot;: &amp;quot;/&amp;quot;,
+          &amp;quot;method&amp;quot;: &amp;quot;GET&amp;quot;,
+          &amp;quot;destination&amp;quot;: &amp;quot;myhost.io&amp;quot;,
+          &amp;quot;scheme&amp;quot;: &amp;quot;https&amp;quot;,
+          &amp;quot;query&amp;quot;: &amp;quot;&amp;quot;,
+          &amp;quot;body&amp;quot;: &amp;quot;&amp;quot;,
+          &amp;quot;headers&amp;quot;: {
+            &amp;quot;Accept&amp;quot;: [
+              &amp;quot;text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8&amp;quot;
+            ],
+            &amp;quot;Content-Type&amp;quot;: [
+              &amp;quot;text/plain; charset=utf-8&amp;quot;
+            ],
+            &amp;quot;User-Agent&amp;quot;: [
+              &amp;quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36&amp;quot;
+            ]
+          }
+        }
+      },
+      {
+        &amp;quot;response&amp;quot;: {
+          &amp;quot;status&amp;quot;: 200,
+          &amp;quot;body&amp;quot;: &amp;quot;&amp;lt;h1&amp;gt;Matched on template&amp;lt;/h1&amp;gt;&amp;quot;,
+          &amp;quot;encodedBody&amp;quot;: false,
+          &amp;quot;headers&amp;quot;: {
+            &amp;quot;Content-Type&amp;quot;: [
+              &amp;quot;text/html; charset=utf-8&amp;quot;
+            ]
+          }
+        },
+        &amp;quot;request&amp;quot;: {
+          &amp;quot;requestType&amp;quot;: &amp;quot;template&amp;quot;,
+          &amp;quot;path&amp;quot;: &amp;quot;/template&amp;quot;,
+          &amp;quot;method&amp;quot;: null,
+          &amp;quot;destination&amp;quot;: null,
+          &amp;quot;scheme&amp;quot;: null,
+          &amp;quot;query&amp;quot;: null,
+          &amp;quot;body&amp;quot;: null,
+          &amp;quot;headers&amp;quot;: null
+        }
+      }
+    ],
+    &amp;quot;globalActions&amp;quot;: {
+      &amp;quot;delays&amp;quot;: []
+    }
+  },
+  &amp;quot;meta&amp;quot;: {
+    &amp;quot;schemaVersion&amp;quot;: &amp;quot;v1&amp;quot;,
+    &amp;quot;hoverflyVersion&amp;quot;: &amp;quot;v0.9.0&amp;quot;,
+    &amp;quot;timeExported&amp;quot;: &amp;quot;2016-11-11T11:53:52Z&amp;quot;
+  }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&#34;get-api-v2-hoverfly&#34;&gt;GET /api/v2/hoverfly&lt;/h3&gt;
+
+&lt;p&gt;Gets configuration information from the running instance of Hoverfly.&lt;/p&gt;
+
+&lt;h4 id=&#34;example-response-body-1&#34;&gt;Example response body&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+    destination: &amp;quot;.&amp;quot;,
+    middleware: &amp;quot;&amp;quot;,
+    mode: &amp;quot;simulate&amp;quot;,
+    usage: {
+        counters: {
+            capture: 0,
+            modify: 0,
+            simulate: 0,
+            synthesize: 0
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&#34;get-api-v2-hoverfly-destination&#34;&gt;GET /api/v2/hoverfly/destination&lt;/h3&gt;
+
+&lt;p&gt;Gets the current destination setting for the running instance of Hoverfly.&lt;/p&gt;
+
+&lt;h4 id=&#34;example-response-body-2&#34;&gt;Example response body&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+    destination: &amp;quot;.&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&#34;put-api-v2-hoverfly-destination&#34;&gt;PUT /api/v2/hoverfly/destination&lt;/h3&gt;
+
+&lt;p&gt;Sets a new destination for the running instance of Hoverfly, overwriting the existing destination setting.&lt;/p&gt;
+
+&lt;h4 id=&#34;example-request-body-1&#34;&gt;Example request body&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+    destination: &amp;quot;new-destination&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&#34;get-api-v2-hoverfly-middleware&#34;&gt;GET /api/v2/hoverfly/middleware&lt;/h3&gt;
+
+&lt;p&gt;Gets the middleware value for the running instance of Hoverfly. This will be either an executable command, or an executable command with a path to a middleware script.&lt;/p&gt;
+
+&lt;h4 id=&#34;example-response-body-3&#34;&gt;Example response body&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+	&amp;quot;middleware&amp;quot;: &amp;quot;python ~/middleware.py&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&#34;put-api-v2-hoverfly-middleware&#34;&gt;PUT /api/v2/hoverfly/middleware&lt;/h3&gt;
+
+&lt;p&gt;Sets a new middleware value, overwriting the existing middleware value for the running instance of Hoverfly. The middleware value should be an executable command, or an executable command with a path to a middleware script. The command and the file must be available on the Hoverfly host machine.&lt;/p&gt;
+
+&lt;h4 id=&#34;example-request-body-2&#34;&gt;Example request body&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+	&amp;quot;middleware&amp;quot;: &amp;quot;python ~/new-middleware.py&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&#34;get-api-v2-hoverfly-mode&#34;&gt;GET /api/v2/hoverfly/mode&lt;/h3&gt;
+
+&lt;p&gt;Gets the mode for the running instance of Hoverfly.&lt;/p&gt;
+
+&lt;h4 id=&#34;example-response-body-4&#34;&gt;Example response body&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+    mode: &amp;quot;simulate&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&#34;put-api-v2-hoverfly-mode&#34;&gt;PUT /api/v2/hoverfly/mode&lt;/h3&gt;
+
+&lt;p&gt;Changes the mode of the running instance of Hoverfly.&lt;/p&gt;
+
+&lt;h4 id=&#34;example-request-body-3&#34;&gt;Example request body&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+    mode: &amp;quot;simulate&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&#34;get-api-v2-hoverfly-usage&#34;&gt;GET /api/v2/hoverfly/usage&lt;/h3&gt;
+
+&lt;p&gt;Gets metrics information for the running instance of Hoverfly.&lt;/p&gt;
+
+&lt;h4 id=&#34;example-response-body-5&#34;&gt;Example response body&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+	&amp;quot;metrics&amp;quot;: {
+		&amp;quot;counters&amp;quot;: {
+			&amp;quot;capture&amp;quot;: 0,
+			&amp;quot;modify&amp;quot;: 0,
+			&amp;quot;simulate&amp;quot;: 0,
+			&amp;quot;synthesize&amp;quot;: 0
+		}
+	}
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;flags-and-environment-variables&#34;&gt;Flags and environment variables&lt;/h2&gt;
+
+&lt;p&gt;Hoverfly can be configured using flags on startup, or using environment variables.&lt;/p&gt;
+
+&lt;h3 id=&#34;authentication&#34;&gt;Authentication&lt;/h3&gt;
+
+&lt;h4 id=&#34;enable-disable-authentication&#34;&gt;Enable/disable authentication&lt;/h4&gt;
+
+&lt;p&gt;Flag:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;-auth &amp;lt;string&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Environment variable:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;export HoverflyAuthEnabled=&amp;lt;string&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Supply &lt;code&gt;true&lt;/code&gt; to enable authentication. Defaults to &lt;code&gt;false&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h4 id=&#34;add-a-new-user&#34;&gt;Add a new user&lt;/h4&gt;
+
+&lt;p&gt;Flags:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;-add -username &amp;lt;string&amp;gt; -password &amp;lt;string&amp;gt; -admin &amp;lt;string&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Supply &amp;lsquo;-admin false&amp;rsquo; to make this a non-admin user (defaults to &amp;lsquo;true&amp;rsquo;).&lt;/p&gt;
+
+&lt;p&gt;For example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;./hoverfly -add -username username -password password -admin false   	
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This creates a new non-admin user with the username &amp;lsquo;username&amp;rsquo; and the password &amp;lsquo;password&amp;rsquo;.&lt;/p&gt;
+
+&lt;p&gt;Environment variables:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;export HoverflyAdmin=&amp;quot;username&amp;quot;
+export HoverflyAdminPass=&amp;quot;password&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Setting these environment variables will create a new admin user when Hoverfly starts.&lt;/p&gt;
+
+&lt;h4 id=&#34;set-hoverfly-secret&#34;&gt;Set Hoverfly secret&lt;/h4&gt;
+
+&lt;p&gt;By default, a random secret is generated every time Hoverfly starts.&lt;/p&gt;
+
+&lt;p&gt;Environment variable:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;export HoverflySecret=&amp;lt;string&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;set-api-token-expiration-in-seconds&#34;&gt;Set API token expiration (in seconds)&lt;/h4&gt;
+
+&lt;p&gt;Set to one day by default.&lt;/p&gt;
+
+&lt;p&gt;Environment variable:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;export HoverflyTokenExpiration=&amp;lt;string&amp;gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;port-selection&#34;&gt;Port selection&lt;/h3&gt;
+
+&lt;h4 id=&#34;set-the-admin-ui-api-port&#34;&gt;Set the Admin UI/API port&lt;/h4&gt;
+
+&lt;p&gt;Defaults to 8888.&lt;/p&gt;
+
+&lt;p&gt;Flag:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;-ap &amp;lt;string&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Environment variable:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;export AdminPort=&amp;lt;string&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;set-the-proxy-port&#34;&gt;Set the proxy port&lt;/h4&gt;
+
+&lt;p&gt;Defaults to 8500.&lt;/p&gt;
+
+&lt;p&gt;Flag:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;-pp &amp;lt;string&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Environment variable:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;export ProxyPort=&amp;lt;string&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;mode-selection-import-middleware&#34;&gt;Mode selection, import &amp;amp; middleware&lt;/h3&gt;
+
+&lt;p&gt;By default, Hoverfly starts in &lt;em&gt;simulate mode&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h4 id=&#34;set-capture-mode&#34;&gt;Set capture mode&lt;/h4&gt;
+
+&lt;p&gt;Flag:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;-capture
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;set-synthesize-mode&#34;&gt;Set synthesize mode&lt;/h4&gt;
+
+&lt;p&gt;Requires middleware to be specified.&lt;/p&gt;
+
+&lt;p&gt;Flag:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;-synthesize
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;set-modify-mode&#34;&gt;Set modify mode&lt;/h4&gt;
+
+&lt;p&gt;Requires middleware to be specified.&lt;/p&gt;
+
+&lt;p&gt;Flag:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;-modify
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;specify-middleware&#34;&gt;Specify middleware&lt;/h4&gt;
+
+&lt;p&gt;Flag:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;-middleware &amp;lt;string&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Supply the path to the middleware script.&lt;/p&gt;
+
+&lt;p&gt;For example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;./hoverfly -synthesize -middleware &amp;quot;scripts/gen_response.py&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;import-service-data&#34;&gt;Import service data&lt;/h4&gt;
+
+&lt;p&gt;Flag:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;-import &amp;lt;string&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Import a service data JSON file from file system or URL. For example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;./hoverfly -import http://mypage.com/service_x.json
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;./hoverfly -import path/to/my/service_x.json      
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Environment variable:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;export HoverflyImport=&amp;lt;string&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;export HoverflyImport=&amp;quot;http://mypage.com/service_x.json&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;webserver&#34;&gt;Webserver&lt;/h3&gt;
+
+&lt;h4 id=&#34;turn-hoverfly-into-a-simulation-webserver&#34;&gt;Turn Hoverfly into a simulation webserver&lt;/h4&gt;
+
+&lt;p&gt;Flag:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;-webserver
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;destination&#34;&gt;Destination&lt;/h3&gt;
+
+&lt;h4 id=&#34;specify-which-hosts-to-process&#34;&gt;Specify which hosts to process&lt;/h4&gt;
+
+&lt;p&gt;Flag:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;-dest &amp;lt;string&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;./hoverfly -dest fooservice.org -dest barservice.org -dest catservice.org
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This will start Hoverfly in &lt;em&gt;simulate mode&lt;/em&gt;, and only simulate requests that are sent to fooservice.org, barservice.org and catservice.org. Requests to all other hosts will pass through.&lt;/p&gt;
+
+&lt;h4 id=&#34;specify-host-uri&#34;&gt;Specify host URI&lt;/h4&gt;
+
+&lt;p&gt;Use regular expression. Defaults to &amp;ldquo;.&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;Flag:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;-destination &amp;lt;string&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;persistence&#34;&gt;Persistence&lt;/h3&gt;
+
+&lt;h4 id=&#34;specify-boltdb-or-in-memory&#34;&gt;Specify BoltDB or in-memory&lt;/h4&gt;
+
+&lt;p&gt;Flag:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;-db &amp;lt;string&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;By default, Hoverfly uses BoltDB to store data in a file on disk. Use &lt;code&gt;-db memory&lt;/code&gt; to disable this and use in-memory persistence only.&lt;/p&gt;
+
+&lt;h4 id=&#34;set-boltdb-file&#34;&gt;Set BoltDB file&lt;/h4&gt;
+
+&lt;p&gt;By default, a &lt;code&gt;requests.db&lt;/code&gt; file is created in the Hoverfly directory.&lt;/p&gt;
+
+&lt;p&gt;Flag:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;-db-path &amp;lt;string&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Environment variable:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;export HoverflyDB=&amp;lt;string&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The file will be created if it doesn&amp;rsquo;t exist.&lt;/p&gt;
+
+&lt;h3 id=&#34;tls-certificate-management&#34;&gt;TLS &amp;amp; Certificate management&lt;/h3&gt;
+
+&lt;h4 id=&#34;generate-certificate&#34;&gt;Generate certificate&lt;/h4&gt;
+
+&lt;p&gt;Hoverfly will generate private and public keys in the current directory.&lt;/p&gt;
+
+&lt;p&gt;Flags:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;-generate-ca-cert -cert-name &amp;lt;string&amp;gt; -cert-org &amp;lt;string&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Certificate name defaults to &amp;ldquo;hoverfly.proxy&amp;rdquo;. Organization name defaults to &amp;ldquo;Hoverfly Authority&amp;rdquo;.&lt;/p&gt;
+
+&lt;h4 id=&#34;use-certificate-and-key&#34;&gt;Use certificate and key&lt;/h4&gt;
+
+&lt;p&gt;Supply paths to certificate and key file.&lt;/p&gt;
+
+&lt;p&gt;Flags:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;-cert &amp;lt;string&amp;gt; -key &amp;lt;string&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;turn-off-tls-verification&#34;&gt;Turn off TLS verification&lt;/h4&gt;
+
+&lt;p&gt;Defaults to &amp;ldquo;true&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;Flag:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;-tls-verification=&amp;lt;string&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Environment variable:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;export HoverflyTlsVerification=&amp;lt;string&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;logging-metrics&#34;&gt;Logging &amp;amp; metrics&lt;/h3&gt;
+
+&lt;h4 id=&#34;enable-verbose-mode&#34;&gt;Enable verbose mode&lt;/h4&gt;
+
+&lt;p&gt;Logs every proxy request to STDOUT.&lt;/p&gt;
+
+&lt;p&gt;Flag:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;-v
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;enable-metrics-logging&#34;&gt;Enable metrics logging&lt;/h4&gt;
+
+&lt;p&gt;Logs metrics to STDOUT.&lt;/p&gt;
+
+&lt;p&gt;Flag:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;-metrics
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;misc&#34;&gt;Misc&lt;/h3&gt;
+
+&lt;h4 id=&#34;use-uncompiled-static-files&#34;&gt;Use uncompiled static files&lt;/h4&gt;
+
+&lt;p&gt;Serve Admin UI static files directly from ./static/dist instead from statik binary.&lt;/p&gt;
+
+&lt;p&gt;Flag:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;-dev
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;get-version&#34;&gt;Get version&lt;/h4&gt;
+
+&lt;p&gt;Get the version of Hoverfly&lt;/p&gt;
+
+&lt;p&gt;Flag:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;-version   
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;hoverctl&#34;&gt;Hoverctl&lt;/h2&gt;
+
+&lt;p&gt;Hoverctl is a command line tool bundled with Hoverfly. The purpose of hoverctl is to help in the managing of one or many instances of Hoverfly. Hoverctl does not support all the functionality of Hoverfly yet, but its feature set is growing.&lt;/p&gt;
+
+&lt;h3 id=&#34;hoverfly-directory&#34;&gt;.hoverfly directory&lt;/h3&gt;
+
+&lt;p&gt;Hoverctl stores its state in a &lt;code&gt;.hoverfly&lt;/code&gt; directory. Hoverctl will create this directory in your home folder the first time it needs to save state. This directory is used for the configuration for Hoverfly, the process identifiers and the log files. Hoverctl will always check the working directory before your home directory when looking for the &lt;code&gt;.hoverfly&lt;/code&gt; directory. This allows for multiple configurations on a per project basis if you require different configurations for Hoverfly.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;.hoverfly/config.yaml
+.hoverfly/hoverfly.8888.8500.pid
+.hoverfly/hoverfly.8888.8500.log
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;configuration&#34;&gt;Configuration&lt;/h4&gt;
+
+&lt;p&gt;Currently, there are six configuration keys needed to use hoverctl.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;hoverfly.host&lt;/code&gt; is used to determine the host address of the Hoverfly you are trying to control.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;hoverfly.admin.port&lt;/code&gt; is used to determine the port that you would like to access the admin interface from.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;hoverfly.proxy.port&lt;/code&gt; is used to determine the port that you would the proxy to run on.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;hoverfly.username&lt;/code&gt; is the username you use to access your authenticated Hoverfly.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;hoverfly.password&lt;/code&gt; is the password you use to access your authenticated Hoverfly.&lt;/p&gt;
+
+&lt;h3 id=&#34;pid-and-log-files&#34;&gt;Pid and log files&lt;/h3&gt;
+
+&lt;p&gt;For each Hoverfly process created with hoverctl, one file is created to store the process identifier and another for the STDOUT and STDERR of Hoverfly. These files will be named using the hoverfly process with both the admin and proxy ports.&lt;/p&gt;
+
+&lt;h4 id=&#34;hoverctl-commands&#34;&gt;Hoverctl commands&lt;/h4&gt;
+
+&lt;h4 id=&#34;start&#34;&gt;start&lt;/h4&gt;
+
+&lt;p&gt;Hoverctl will let you start a Hoverfly process. For this to work, you need to have the Hoverfly binary on your $PATH. It will start up Hoverfly on the admin and proxy ports as specified in the &lt;code&gt;config.yaml&lt;/code&gt;. There is no limit to the number of Hoverfly processes you can start. The only requirement is that each Hoverfly process has its own unique admin and proxy ports.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hoverctl start
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;By default, hoverctl will start Hoverfly as a proxy. If you wish to start Hoverfly as a webserver instead:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hoverctl start webserver
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;stop&#34;&gt;stop&lt;/h4&gt;
+
+&lt;p&gt;You can also stop Hoverfly processes using Hoverctl.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hoverctl stop
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;mode&#34;&gt;mode&lt;/h4&gt;
+
+&lt;p&gt;Using hoverctl, you can find out which mode Hoverfly is running in.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hoverctl mode
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can also change the mode by specifying the name of mode you want Hoverfly to be in.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hoverctl mode capture
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;delete&#34;&gt;delete&lt;/h4&gt;
+
+&lt;p&gt;Hoverfly stores internal state while its running. This state is used for testing your application. Using the delete command, you can specify what you want to delete from Hoverfly.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hoverctl delete simulations
+hoverctl delete delays
+hoverctl delete all
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;export&#34;&gt;export&lt;/h4&gt;
+
+&lt;p&gt;Instead of having to save the response from the records API endpoint, you can use the export function to save your simulation to disk.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hoverctl export simulation.json
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;import&#34;&gt;import&lt;/h4&gt;
+
+&lt;p&gt;Once you have simulations saved, you can import them into Hoverfly using the import function.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hoverctl import simulations.json
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If your simulation file is hosted over HTTP, you can use hoverctl to import it.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hoverctl import http://example.org/simulation.json
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you have older, v1 simulations, you may still import them using the &lt;code&gt;v1&lt;/code&gt; flag.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hoverctl import --v1 old-simulations.json
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;delays&#34;&gt;delays&lt;/h4&gt;
+
+&lt;p&gt;If you want to apply delays to individual hosts in a simulation (to simulate netwrok latency, for example), you can use the &lt;code&gt;delays&lt;/code&gt; function to supply a JSON file containing the delay configuration or to view delays which have been applied (See &lt;strong&gt;Simulating service latency&lt;/strong&gt; in the &lt;strong&gt;Usage&lt;/strong&gt; section).&lt;/p&gt;
+
+&lt;p&gt;Set delays by supplying JSON file:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hoverctl delays path/to/my_delays.json
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Show delays that have been set:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hoverctl delays
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;templates&#34;&gt;templates&lt;/h4&gt;
+
+&lt;p&gt;As well importing request/response data using import, you can also import request templates for partial matching to a response using the &lt;code&gt;templates&lt;/code&gt; function. This function works with a JSON file containing the JSON schema for request templates and responses. (See &lt;strong&gt;Matching requests&lt;/strong&gt; in the &lt;strong&gt;Usage&lt;/strong&gt; section).&lt;/p&gt;
+
+&lt;p&gt;Set templates by supplying JSON file:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hoverctl templates path/to/my_request_templates.json
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Show templates that have been set:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hoverctl templates
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;middleware&#34;&gt;middleware&lt;/h4&gt;
+
+&lt;p&gt;This function is used for getting and setting the middleware being executed by Hoverfly.&lt;/p&gt;
+
+&lt;p&gt;To get the middleware currently being used by Hoverfly&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hoverctl middleware
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To set the middleware Hoverfly to use&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hoverctl middleware &amp;quot;middleware.sh&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The value given to the middleware function should be a string that contains either a file path, a command a file path or a URL.&lt;/p&gt;
+
+&lt;h4 id=&#34;logs&#34;&gt;logs&lt;/h4&gt;
+
+&lt;p&gt;Used to get the logs from the instance of Hoverfly started with the hoverctl. This command will return all the logs from when the process was started&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hoverctl logs
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you are trying to debug what is happening and you need to watch the Hoverfly logs, you can use the &lt;code&gt;--follow&lt;/code&gt; flag to tail the logs and watch them in real time.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hoverctl logs --follow
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;hoverctl-flags&#34;&gt;Hoverctl flags&lt;/h3&gt;
+
+&lt;h4 id=&#34;host&#34;&gt;&amp;ndash;host&lt;/h4&gt;
+
+&lt;p&gt;This is a global flag that can be used to override the hoverfly.host configuration value from the config.yaml file.&lt;/p&gt;
+
+&lt;h4 id=&#34;admin-port&#34;&gt;&amp;ndash;admin-port&lt;/h4&gt;
+
+&lt;p&gt;This is a global flag that can be used to override the hoverfly.admin.port configuration value from the config.yaml file.&lt;/p&gt;
+
+&lt;h4 id=&#34;proxy-port&#34;&gt;&amp;ndash;proxy-port&lt;/h4&gt;
+
+&lt;p&gt;This is a global flag that can be used to override the hoverfly.proxy.port configuration value from the config.yaml file.&lt;/p&gt;
+
+&lt;h4 id=&#34;verbose&#34;&gt;&amp;ndash;verbose&lt;/h4&gt;
+
+&lt;p&gt;This is a global flag that can be used to get the verbose logs from hoverctl.&lt;/p&gt;
+
+&lt;h4 id=&#34;version&#34;&gt;&amp;ndash;version&lt;/h4&gt;
+
+&lt;p&gt;This is a global flag that can be used to get the version of hoverctl.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
