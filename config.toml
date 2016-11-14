@@ -35,7 +35,7 @@ googleAnalytics = ""
 
     [params.font]
     	text = "Lato"
-    	code = "Consolas"
+    	code = "Ubuntu Mono"
 
 
 [social]
