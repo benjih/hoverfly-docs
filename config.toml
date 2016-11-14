@@ -1,7 +1,6 @@
 baseurl = "http://hoverfly.io/"
 languageCode = "en-us"
 title = "Hoverfly"
-theme = "hugo-material-docs"
 metadataformat = "yaml"
 canonifyurls = true
 # Enable Google Analytics by entering your tracking id
