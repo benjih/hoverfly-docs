@@ -425,7 +425,7 @@ hoverctl mode simulate
 &lt;pre&gt;&lt;code&gt;hoverctl export mysimulation.json
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;For more information about hoverctl, &lt;a href=&#34;../reference/hoverctl.md&#34;&gt;check here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;For more information about hoverctl, check the &lt;strong&gt;Refernce&lt;/strong&gt; section.&lt;/p&gt;
 
 &lt;h3 id=&#34;simulation-data-json-format&#34;&gt;Simulation data JSON format&lt;/h3&gt;
 
