@@ -1880,7 +1880,7 @@ export HoverflyAdminPass=&amp;quot;password&amp;quot;
 
 &lt;p&gt;Hoverctl stores its state in a &lt;code&gt;.hoverfly&lt;/code&gt; directory. Hoverctl will create this directory in your home folder the first time it needs to save state. This directory is used for the configuration for Hoverfly, the process identifiers and the log files. Hoverctl will always check the working directory before your home directory when looking for the &lt;code&gt;.hoverfly&lt;/code&gt; directory. This allows for multiple configurations on a per project basis if you require different configurations for Hoverfly.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;.hoverfly/config.yaml
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;.hoverfly/config.yaml
 .hoverfly/hoverfly.8888.8500.pid
 .hoverfly/hoverfly.8888.8500.log
 &lt;/code&gt;&lt;/pre&gt;

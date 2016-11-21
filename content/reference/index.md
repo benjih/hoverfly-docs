@@ -573,7 +573,7 @@ Hoverctl is a command line tool bundled with Hoverfly. The purpose of hoverctl i
 ### .hoverfly directory
 Hoverctl stores its state in a `.hoverfly` directory. Hoverctl will create this directory in your home folder the first time it needs to save state. This directory is used for the configuration for Hoverfly, the process identifiers and the log files. Hoverctl will always check the working directory before your home directory when looking for the `.hoverfly` directory. This allows for multiple configurations on a per project basis if you require different configurations for Hoverfly.
 
-```
+```sh
 .hoverfly/config.yaml
 .hoverfly/hoverfly.8888.8500.pid
 .hoverfly/hoverfly.8888.8500.log
