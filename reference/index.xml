@@ -766,6 +766,13 @@ hoverctl delete all
 &lt;pre&gt;&lt;code&gt;hoverctl destination &#39;\.io&#39; --dry-run http://hoverfly.io
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;h4 id=&#34;config&#34;&gt;config&lt;/h4&gt;
+
+&lt;p&gt;This command is used for getting the file location of the config.yaml being used. This command will also print the configuration that hoverctl is using.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hoverctl config
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;h4 id=&#34;logs&#34;&gt;logs&lt;/h4&gt;
 
 &lt;p&gt;Used to get the logs from the instance of Hoverfly started with the hoverctl. This command will return all the logs from when the process was started&lt;/p&gt;
