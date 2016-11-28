@@ -16,7 +16,7 @@ googleAnalytics = ""
 	provider = "GitHub"
 	repo_url = "https://github.com/SpectoLabs/hoverfly"
 
-	version = "0.9.0"
+	version = "0.9.1"
 	logo = "img/logo.png"
 	favicon = "img/favicon-16x16.png"
 
