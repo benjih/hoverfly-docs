@@ -580,17 +580,18 @@ Hoverctl stores its state in a `.hoverfly` directory. Hoverctl will create this 
 ```
 
 #### Configuration
-Currently, there are six configuration keys needed to use hoverctl.
-
-```hoverfly.host``` is used to determine the host address of the Hoverfly you are trying to control.
-
-```hoverfly.admin.port``` is used to determine the port that you would like to access the admin interface from.
-
-```hoverfly.proxy.port``` is used to determine the port that you would the proxy to run on.
-
-```hoverfly.username``` is the username you use to access your authenticated Hoverfly.
-
-```hoverfly.password``` is the password you use to access your authenticated Hoverfly.
+```
+hoverfly.host             #default "localhost"
+hoverfly.admin.port       #default "8888"
+hoverfly.proxy.port       #default "8500"
+hoverfly.username         #default ""
+hoverfly.password         #default ""
+hoverfly.db.type          #default "memory"
+hoverfly.webserver        #default false
+hoverfly.tls.certificate" #default ""
+hoverfly.tls.key          #default ""
+hoverfly.tls.disable      #default false
+```
 
 ### Pid and log files
 For each Hoverfly process created with hoverctl, one file is created to store the process identifier and another for the STDOUT and STDERR of Hoverfly. These files will be named using the hoverfly process with both the admin and proxy ports.
@@ -598,18 +599,28 @@ For each Hoverfly process created with hoverctl, one file is created to store th
 #### Hoverctl commands
 
 #### start
-Hoverctl will let you start a Hoverfly process. For this to work, you need to have the Hoverfly binary on your $PATH. It will start up Hoverfly on the admin and proxy ports as specified in the `config.yaml`. There is no limit to the number of Hoverfly processes you can start. The only requirement is that each Hoverfly process has its own unique admin and proxy ports.
-
-    hoverctl start
+Hoverctl will let you start a Hoverfly process. For this to work, you need to have the Hoverfly binary either in the same directory as hoverctl or have Hoverfly on your $PATH. Hoverctl will start Hoverfly based on the configuration defined in your `config.yaml`. There is no limit to the number of Hoverfly processes you can start. The only requirement is that each Hoverfly process has its own unique admin and proxy ports.
+```
+hoverctl start
+```
+Using the global flags, it is possible to override the configuration being set when starting an instance of Hoverfly.
+```
+hoverctl start --disable-tls
+```
 
 By default, hoverctl will start Hoverfly as a proxy. If you wish to start Hoverfly as a webserver instead:
-
-    hoverctl start webserver
-
+```
+hoverctl start webserver
+```
 #### stop
 You can also stop Hoverfly processes using Hoverctl.
 
     hoverctl stop
+
+The global flags can also be used here. If you have started an instance of Hoverfly on a different admin and proxy port to your config.yaml, you can still stop this by using the flags in combination with the stop command.
+```
+hoverctl stop --admin-port 1234 --proxy-port 4321
+```
 
 #### mode
 Using hoverctl, you can find out which mode Hoverfly is running in.
@@ -679,6 +690,23 @@ To set the middleware Hoverfly to use
 
 The value given to the middleware function should be a string that contains either a file path, a command a file path or a URL.
 
+#### destination
+This command is used for getting and setting the destination being used to determine which requests are being processed by Hoverfly.
+
+To get the destination currently being used by Hoverfly
+```
+hoverctl destination
+```
+To set the destination value Hoverfly should use
+```
+hoverctl destination 'hoverfly.io'
+```
+The value used should compile to Golang regex. Hoverctl will attempt to compile the expression down and will warn the user if it does not compile.
+
+You can also test your destination value using the `--dry-run` flag. This flag will not set the destination, but instead will test if your regex pattern matches your intended response to record.
+```
+hoverctl destination '\.io' --dry-run http://hoverfly.io
+```
 #### logs
 Used to get the logs from the instance of Hoverfly started with the hoverctl. This command will return all the logs from when the process was started
 
@@ -699,8 +727,17 @@ This is a global flag that can be used to override the hoverfly.admin.port confi
 #### --proxy-port
 This is a global flag that can be used to override the hoverfly.proxy.port configuration value from the config.yaml file.
 
+#### --certificate
+This is a global flag that can be used to override the hoverfly.tls.certificate configuration value from the config.yaml file.
+
+#### --key
+This is a global flag that can be used to override the hoverfly.tls.key configuration value from the config.yaml file.
+
+#### --disable-tls
+This is a global flag that can be used to override the hoverfly.tls.disable configuration value from the config.yaml file.
+
 #### --verbose
 This is a global flag that can be used to get the verbose logs from hoverctl.
 
-#### --version
+#### --version (-v)
 This is a global flag that can be used to get the version of hoverctl.

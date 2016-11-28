@@ -901,31 +901,20 @@ This example is taken from a more detailed step-by-step guide:
 
 ***
 
-## Filtering destination URLs and hosts
+## Filtering destination
 You may wish to control what Hoverfly captures or simulates. By default, Hoverfly will process everything.
 
-To specify which URLs Hoverfly processes you can either use the `-destination` flag on startup to supply a regular expression:
-
+To specify which URLs Hoverfly processes you can use the `hoverctl destination` command. You can provide this either an exact match or regex. This destination will be compared against the host and the path of a URL. For example, we can tell Hoverfly to ignore anything that isn't hoverfly.io.
 ```
-./hoverfly -destination="<my_regex>"
+hoverctl destination "hoverfly.io"
 ```
-
-Or you can supply multiple hosts using the `-dest` flag on startup:
-
+But we could specficially say we are only interested in capturing any request response if it contains an API.
 ```
-./hoverfly -dest www.myservice1.org -dest www.myservice2.org -dest www.myservice3.org
+hoverctl destination "api"
 ```
+Thhis destination would match on `api.hoverfly.io/endpoint` and `hoverfly.io/api/endpoint`.
 
-You can also set the destination host using the API:
-
-```
-curl -H "Content-Type application/json" -X POST -d '{"destination": "www.myservice1.org"}' http://${HOVERFLY_HOST}:8888/api/v2/hoverfly/destination
-```
-
-Hoverfly will then process only those requests which match the specified destination.
-
-All other requests will be passed through. This allows you to start by simulating just a few services.
-
+Hoverfly will only process those requests which match the specified destination. All other requests will be passed through. This applies to all modes. With a destination set, it is possible to request real responses alongside simulated responses with simulate mode.
 ***
 
 ## HTTPS support & certificate management
@@ -946,8 +935,12 @@ This will create `cert.pem` and a `key.pem` files in your current directory. Nex
 ```
 ./hoverfly -cert cert.pem -key key.pem
 ```
+You can also define the certificate and key to use with Hoverctl.
+```
+hoverctl start --certificate cert.pem --key.pem
+```
 
-You will then need to add the `cert.pem` file to your trusted certificates. Alternatively, you can turn off certificate verification. For example, to make insecure requests with cURL, you can use the `-k` flag:
+Once Hoverfly has started with the new certificate and key file, you will then need to add the `cert.pem` file to your trusted certificates. Alternatively, you can turn off certificate verification. For example, to make insecure requests with cURL, you can use the `-k` flag:
 
 ```
 curl https://www.bbc.co.uk --proxy http://${HOVERFLY_HOST}:8500 -k
@@ -963,10 +956,10 @@ You can tell Hoverfly to ignore untrusted certificates when capturing or modifyi
 ./hoverfly -tls-verification=false
 ```
 
-**B:** Set the `HoverflyTlsVerification` environment variable:
+**B:** Use the --disable-tls flag on hoverctl
 
 ```
-export HoverflyTlsVerification=false     
+hoverctl start --disable-tls
 ```
 
 ***

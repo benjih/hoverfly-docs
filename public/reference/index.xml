@@ -609,17 +609,17 @@ export HoverflyAdminPass=&amp;quot;password&amp;quot;
 
 &lt;h4 id=&#34;configuration&#34;&gt;Configuration&lt;/h4&gt;
 
-&lt;p&gt;Currently, there are six configuration keys needed to use hoverctl.&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;hoverfly.host&lt;/code&gt; is used to determine the host address of the Hoverfly you are trying to control.&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;hoverfly.admin.port&lt;/code&gt; is used to determine the port that you would like to access the admin interface from.&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;hoverfly.proxy.port&lt;/code&gt; is used to determine the port that you would the proxy to run on.&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;hoverfly.username&lt;/code&gt; is the username you use to access your authenticated Hoverfly.&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;hoverfly.password&lt;/code&gt; is the password you use to access your authenticated Hoverfly.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;hoverfly.host             #default &amp;quot;localhost&amp;quot;
+hoverfly.admin.port       #default &amp;quot;8888&amp;quot;
+hoverfly.proxy.port       #default &amp;quot;8500&amp;quot;
+hoverfly.username         #default &amp;quot;&amp;quot;
+hoverfly.password         #default &amp;quot;&amp;quot;
+hoverfly.db.type          #default &amp;quot;memory&amp;quot;
+hoverfly.webserver        #default false
+hoverfly.tls.certificate&amp;quot; #default &amp;quot;&amp;quot;
+hoverfly.tls.key          #default &amp;quot;&amp;quot;
+hoverfly.tls.disable      #default false
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3 id=&#34;pid-and-log-files&#34;&gt;Pid and log files&lt;/h3&gt;
 
@@ -629,9 +629,14 @@ export HoverflyAdminPass=&amp;quot;password&amp;quot;
 
 &lt;h4 id=&#34;start&#34;&gt;start&lt;/h4&gt;
 
-&lt;p&gt;Hoverctl will let you start a Hoverfly process. For this to work, you need to have the Hoverfly binary on your $PATH. It will start up Hoverfly on the admin and proxy ports as specified in the &lt;code&gt;config.yaml&lt;/code&gt;. There is no limit to the number of Hoverfly processes you can start. The only requirement is that each Hoverfly process has its own unique admin and proxy ports.&lt;/p&gt;
+&lt;p&gt;Hoverctl will let you start a Hoverfly process. For this to work, you need to have the Hoverfly binary either in the same directory as hoverctl or have Hoverfly on your $PATH. Hoverctl will start Hoverfly based on the configuration defined in your &lt;code&gt;config.yaml&lt;/code&gt;. There is no limit to the number of Hoverfly processes you can start. The only requirement is that each Hoverfly process has its own unique admin and proxy ports.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;hoverctl start
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Using the global flags, it is possible to override the configuration being set when starting an instance of Hoverfly.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hoverctl start --disable-tls
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;By default, hoverctl will start Hoverfly as a proxy. If you wish to start Hoverfly as a webserver instead:&lt;/p&gt;
@@ -644,6 +649,11 @@ export HoverflyAdminPass=&amp;quot;password&amp;quot;
 &lt;p&gt;You can also stop Hoverfly processes using Hoverctl.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;hoverctl stop
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The global flags can also be used here. If you have started an instance of Hoverfly on a different admin and proxy port to your config.yaml, you can still stop this by using the flags in combination with the stop command.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hoverctl stop --admin-port 1234 --proxy-port 4321
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h4 id=&#34;mode&#34;&gt;mode&lt;/h4&gt;
@@ -735,6 +745,27 @@ hoverctl delete all
 
 &lt;p&gt;The value given to the middleware function should be a string that contains either a file path, a command a file path or a URL.&lt;/p&gt;
 
+&lt;h4 id=&#34;destination-1&#34;&gt;destination&lt;/h4&gt;
+
+&lt;p&gt;This command is used for getting and setting the destination being used to determine which requests are being processed by Hoverfly.&lt;/p&gt;
+
+&lt;p&gt;To get the destination currently being used by Hoverfly&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hoverctl destination
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To set the destination value Hoverfly should use&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hoverctl destination &#39;hoverfly.io&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The value used should compile to Golang regex. Hoverctl will attempt to compile the expression down and will warn the user if it does not compile.&lt;/p&gt;
+
+&lt;p&gt;You can also test your destination value using the &lt;code&gt;--dry-run&lt;/code&gt; flag. This flag will not set the destination, but instead will test if your regex pattern matches your intended response to record.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hoverctl destination &#39;\.io&#39; --dry-run http://hoverfly.io
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;h4 id=&#34;logs&#34;&gt;logs&lt;/h4&gt;
 
 &lt;p&gt;Used to get the logs from the instance of Hoverfly started with the hoverctl. This command will return all the logs from when the process was started&lt;/p&gt;
@@ -761,11 +792,23 @@ hoverctl delete all
 
 &lt;p&gt;This is a global flag that can be used to override the hoverfly.proxy.port configuration value from the config.yaml file.&lt;/p&gt;
 
+&lt;h4 id=&#34;certificate&#34;&gt;&amp;ndash;certificate&lt;/h4&gt;
+
+&lt;p&gt;This is a global flag that can be used to override the hoverfly.tls.certificate configuration value from the config.yaml file.&lt;/p&gt;
+
+&lt;h4 id=&#34;key&#34;&gt;&amp;ndash;key&lt;/h4&gt;
+
+&lt;p&gt;This is a global flag that can be used to override the hoverfly.tls.key configuration value from the config.yaml file.&lt;/p&gt;
+
+&lt;h4 id=&#34;disable-tls&#34;&gt;&amp;ndash;disable-tls&lt;/h4&gt;
+
+&lt;p&gt;This is a global flag that can be used to override the hoverfly.tls.disable configuration value from the config.yaml file.&lt;/p&gt;
+
 &lt;h4 id=&#34;verbose&#34;&gt;&amp;ndash;verbose&lt;/h4&gt;
 
 &lt;p&gt;This is a global flag that can be used to get the verbose logs from hoverctl.&lt;/p&gt;
 
-&lt;h4 id=&#34;version&#34;&gt;&amp;ndash;version&lt;/h4&gt;
+&lt;h4 id=&#34;version-v&#34;&gt;&amp;ndash;version (-v)&lt;/h4&gt;
 
 &lt;p&gt;This is a global flag that can be used to get the version of hoverctl.&lt;/p&gt;
 </description>
