@@ -897,28 +897,23 @@ if __name__ == &amp;quot;__main__&amp;quot;:
 
 &lt;hr /&gt;
 
-&lt;h2 id=&#34;filtering-destination-urls-and-hosts&#34;&gt;Filtering destination URLs and hosts&lt;/h2&gt;
+&lt;h2 id=&#34;filtering-destination&#34;&gt;Filtering destination&lt;/h2&gt;
 
 &lt;p&gt;You may wish to control what Hoverfly captures or simulates. By default, Hoverfly will process everything.&lt;/p&gt;
 
-&lt;p&gt;To specify which URLs Hoverfly processes you can either use the &lt;code&gt;-destination&lt;/code&gt; flag on startup to supply a regular expression:&lt;/p&gt;
+&lt;p&gt;To specify which URLs Hoverfly processes you can use the &lt;code&gt;hoverctl destination&lt;/code&gt; command. You can provide this either an exact match or regex. This destination will be compared against the host and the path of a URL. For example, we can tell Hoverfly to ignore anything that isn&amp;rsquo;t hoverfly.io.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;./hoverfly -destination=&amp;quot;&amp;lt;my_regex&amp;gt;&amp;quot;
+&lt;pre&gt;&lt;code&gt;hoverctl destination &amp;quot;hoverfly.io&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Or you can supply multiple hosts using the &lt;code&gt;-dest&lt;/code&gt; flag on startup:&lt;/p&gt;
+&lt;p&gt;But we could specficially say we are only interested in capturing any request response if it contains an API.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;./hoverfly -dest www.myservice1.org -dest www.myservice2.org -dest www.myservice3.org
+&lt;pre&gt;&lt;code&gt;hoverctl destination &amp;quot;api&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;You can also set the destination host using the API:&lt;/p&gt;
+&lt;p&gt;Thhis destination would match on &lt;code&gt;api.hoverfly.io/endpoint&lt;/code&gt; and &lt;code&gt;hoverfly.io/api/endpoint&lt;/code&gt;.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;curl -H &amp;quot;Content-Type application/json&amp;quot; -X POST -d &#39;{&amp;quot;destination&amp;quot;: &amp;quot;www.myservice1.org&amp;quot;}&#39; http://${HOVERFLY_HOST}:8888/api/v2/hoverfly/destination
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Hoverfly will then process only those requests which match the specified destination.&lt;/p&gt;
-
-&lt;p&gt;All other requests will be passed through. This allows you to start by simulating just a few services.&lt;/p&gt;
+&lt;p&gt;Hoverfly will only process those requests which match the specified destination. All other requests will be passed through. This applies to all modes. With a destination set, it is possible to request real responses alongside simulated responses with simulate mode.&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -940,7 +935,12 @@ if __name__ == &amp;quot;__main__&amp;quot;:
 &lt;pre&gt;&lt;code&gt;./hoverfly -cert cert.pem -key key.pem
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;You will then need to add the &lt;code&gt;cert.pem&lt;/code&gt; file to your trusted certificates. Alternatively, you can turn off certificate verification. For example, to make insecure requests with cURL, you can use the &lt;code&gt;-k&lt;/code&gt; flag:&lt;/p&gt;
+&lt;p&gt;You can also define the certificate and key to use with Hoverctl.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hoverctl start --certificate cert.pem --key.pem
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Once Hoverfly has started with the new certificate and key file, you will then need to add the &lt;code&gt;cert.pem&lt;/code&gt; file to your trusted certificates. Alternatively, you can turn off certificate verification. For example, to make insecure requests with cURL, you can use the &lt;code&gt;-k&lt;/code&gt; flag:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;curl https://www.bbc.co.uk --proxy http://${HOVERFLY_HOST}:8500 -k
 &lt;/code&gt;&lt;/pre&gt;
@@ -954,9 +954,9 @@ if __name__ == &amp;quot;__main__&amp;quot;:
 &lt;pre&gt;&lt;code&gt;./hoverfly -tls-verification=false
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;strong&gt;B:&lt;/strong&gt; Set the &lt;code&gt;HoverflyTlsVerification&lt;/code&gt; environment variable:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B:&lt;/strong&gt; Use the &amp;ndash;disable-tls flag on hoverctl&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;export HoverflyTlsVerification=false     
+&lt;pre&gt;&lt;code&gt;hoverctl start --disable-tls
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;hr /&gt;
