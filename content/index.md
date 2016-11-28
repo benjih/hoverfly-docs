@@ -20,11 +20,11 @@ Hoverfly is a single binary file. It comes with an optional command line interfa
 
 Download one of the zip files below, extract the Hoverfly and hoverctl binaries, and move them to a directory on your [PATH](https://www.java.com/en/download/help/path.xml).
 
-* [macOS 64bit](https://github.com/SpectoLabs/hoverfly/releases/download/v0.9.0/hoverfly_bundle_OSX_amd64.zip)
-* [Linux 32bit](https://github.com/SpectoLabs/hoverfly/releases/download/v0.9.0/hoverfly_bundle_linux_386.zip)
-* [Linux 64bit](https://github.com/SpectoLabs/hoverfly/releases/download/v0.9.0/hoverfly_bundle_linux_amd64.zip)
-* [Windows 32bit](https://github.com/SpectoLabs/hoverfly/releases/download/v0.9.0/hoverfly_bundle_windows_386.zip)
-* [Windows 64bit](https://github.com/SpectoLabs/hoverfly/releases/download/v0.9.0/hoverfly_bundle_windows_amd64.zip)
+* [macOS 64bit](https://github.com/SpectoLabs/hoverfly/releases/download/v0.9.1/hoverfly_bundle_OSX_amd64.zip)
+* [Linux 32bit](https://github.com/SpectoLabs/hoverfly/releases/download/v0.9.1/hoverfly_bundle_linux_386.zip)
+* [Linux 64bit](https://github.com/SpectoLabs/hoverfly/releases/download/v0.9.1/hoverfly_bundle_linux_amd64.zip)
+* [Windows 32bit](https://github.com/SpectoLabs/hoverfly/releases/download/v0.9.1/hoverfly_bundle_windows_386.zip)
+* [Windows 64bit](https://github.com/SpectoLabs/hoverfly/releases/download/v0.9.1/hoverfly_bundle_windows_amd64.zip)
 
 
 Use [Homebrew](http://brew.sh/) to install Hoverfly and hoverctl:

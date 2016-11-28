@@ -34,11 +34,11 @@
 &lt;p&gt;Download one of the zip files below, extract the Hoverfly and hoverctl binaries, and move them to a directory on your &lt;a href=&#34;https://www.java.com/en/download/help/path.xml&#34;&gt;PATH&lt;/a&gt;.&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/SpectoLabs/hoverfly/releases/download/v0.9.0/hoverfly_bundle_OSX_amd64.zip&#34;&gt;macOS 64bit&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/SpectoLabs/hoverfly/releases/download/v0.9.0/hoverfly_bundle_linux_386.zip&#34;&gt;Linux 32bit&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/SpectoLabs/hoverfly/releases/download/v0.9.0/hoverfly_bundle_linux_amd64.zip&#34;&gt;Linux 64bit&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/SpectoLabs/hoverfly/releases/download/v0.9.0/hoverfly_bundle_windows_386.zip&#34;&gt;Windows 32bit&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/SpectoLabs/hoverfly/releases/download/v0.9.0/hoverfly_bundle_windows_amd64.zip&#34;&gt;Windows 64bit&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/SpectoLabs/hoverfly/releases/download/v0.9.1/hoverfly_bundle_OSX_amd64.zip&#34;&gt;macOS 64bit&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/SpectoLabs/hoverfly/releases/download/v0.9.1/hoverfly_bundle_linux_386.zip&#34;&gt;Linux 32bit&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/SpectoLabs/hoverfly/releases/download/v0.9.1/hoverfly_bundle_linux_amd64.zip&#34;&gt;Linux 64bit&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/SpectoLabs/hoverfly/releases/download/v0.9.1/hoverfly_bundle_windows_386.zip&#34;&gt;Windows 32bit&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/SpectoLabs/hoverfly/releases/download/v0.9.1/hoverfly_bundle_windows_amd64.zip&#34;&gt;Windows 64bit&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;Use &lt;a href=&#34;http://brew.sh/&#34;&gt;Homebrew&lt;/a&gt; to install Hoverfly and hoverctl:&lt;/p&gt;
@@ -2042,6 +2042,13 @@ hoverctl delete all
 &lt;p&gt;You can also test your destination value using the &lt;code&gt;--dry-run&lt;/code&gt; flag. This flag will not set the destination, but instead will test if your regex pattern matches your intended response to record.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;hoverctl destination &#39;\.io&#39; --dry-run http://hoverfly.io
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;config&#34;&gt;config&lt;/h4&gt;
+
+&lt;p&gt;This command is used for getting the file location of the config.yaml being used. This command will also print the configuration that hoverctl is using.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hoverctl config
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h4 id=&#34;logs&#34;&gt;logs&lt;/h4&gt;

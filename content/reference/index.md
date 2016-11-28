@@ -707,6 +707,12 @@ You can also test your destination value using the `--dry-run` flag. This flag w
 ```
 hoverctl destination '\.io' --dry-run http://hoverfly.io
 ```
+#### config
+This command is used for getting the file location of the config.yaml being used. This command will also print the configuration that hoverctl is using.
+```
+hoverctl config
+```
+
 #### logs
 Used to get the logs from the instance of Hoverfly started with the hoverctl. This command will return all the logs from when the process was started
 
